@@ -1,4 +1,4 @@
-# Synchonevo-Clash
+# Synchonevo Clash
 
 # ⚔️ Merge Tactics: Turn-Based Strategy Game
 
