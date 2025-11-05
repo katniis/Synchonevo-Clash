@@ -30,6 +30,6 @@ Reduce your opponent’s **health to zero** through **tactical merges**, **smart
 - Unit abilities and special effects  
 - Expanded card pool and rarity system  
 - Visual board representation (CLI or GUI)
-
+#
 ---
 
