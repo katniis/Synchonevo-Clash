@@ -1,8 +1,10 @@
 UNIT
 ------
+[] Add more units
 [] Add position(front, mid, backrow)
 [] Unique attacks for different Units (crit rate, crit damage, defense, attack boost, etc)
 [] Create attack pattern algorithm
+[] Synergy 💡
 
 BOSS
 ------
