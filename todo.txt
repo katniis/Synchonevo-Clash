@@ -1,0 +1,22 @@
+UNIT
+------
+[] Add position(front, mid, backrow)
+[] Unique attacks for different Units (crit rate, crit damage, defense, attack boost, etc)
+[] Create attack pattern algorithm
+
+BOSS
+------
+[] Create Boss
+[] 3 different attack pattern
+[] random attack pattern
+
+MECHANICS
+------
+[] Interaction (PRIORITY)
+[] Switch Position (UNIT)
+[] Player
+[] Bench
+[] Shop
+[] Battlelog
+
+and some.... (wala nako maisip)
