@@ -1,13 +1,25 @@
 package units;
 
 public class TankUnit extends Unit {
-    public TankUnit(String className, String name, int hp, int attack, String skill) {
-        super(className, name, hp, attack, skill);
+    private final int baseHp;
+    private final int baseAtk;
+
+    public TankUnit(String name, int hp, int atk, int speed, double critRate, double critDamage) {
+        super(name, "TANK", hp, atk, speed, critRate, critDamage);
+        this.baseHp = hp;
+        this.baseAtk = atk;
     }
 
     @Override
-    public void attack(Unit target) {
-        System.out.println(name + " " + skill + " " + target.getName() + "!");
-        target.setHp(target.getHp() - attack);
+    protected int baseHp() { return baseHp; }
+
+    @Override
+    protected int baseAttack() { return baseAtk; }
+
+    @Override
+    public String attack(Unit target) {
+        int dmg = computeDamage();
+        target.takeDamage(dmg);
+        return String.format("%s smashes %s for %d damage.", displayName(), target.displayName(), dmg);
     }
 }
