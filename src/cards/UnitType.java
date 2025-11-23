@@ -5,11 +5,10 @@ public enum UnitType {
     ELDER_DWARF,
     MAGE,
     WARLOCK,
-    ELF,
+    ARCHER,
     HUNTER,
     FIGHTER,
-    HEAVY_SWORDMAN,
+    HEAVYSWORDMAN,
     WYRMLINGS,
-    WYVERN;
+    WYVERN
 }
-
