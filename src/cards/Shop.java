@@ -1,26 +1,37 @@
 package cards;
 
 import java.util.*;
-
 public class Shop {
-    private Card[] slots;
-    private int size;
+    private List<Card> slots = new ArrayList<>();
+    private int size = 4; // maximum number of cards can be rolled
     private Random rand = new Random();
+    private int stage;
 
-    public Shop(int size) {
-        this.size = size;
-        this.slots = new Card[size];
-        roll(1);
+    public Shop(int stage) {
+        this.stage = stage;
+        rollByDefault(stage);
     }
 
     // roll according to stage chances for stars
     public void roll(int stage) {
+        slots.clear();
         for (int i = 0; i < size; i++) {
             UnitType t = randomType();
             int star = chooseStar(stage);
             int cost = 1 + (star - 1); // simple cost mapping
             String desc = "";
-            slots[i] = UnitFactory.createCard(t, star, cost, desc);
+            slots.add(UnitFactory.createCard(t, star, cost, desc));
+        }
+    }
+
+    private void rollByDefault(int stage) {
+        slots.clear();
+        for (int i = 0; i < size; i++) {
+            UnitType t = randomType();
+            int star = chooseStar(stage);
+            int cost = 1 + (star - 1); // simple cost mapping
+            String desc = "";
+            slots.add(UnitFactory.createCard(t, star, cost, desc));
         }
     }
 
@@ -50,21 +61,23 @@ public class Shop {
         }
     }
 
-    public Card[] getSlots() { return slots; }
+    public List<Card> getSlots() { return slots; }
 
     public Card buy(int index, int playerGold) throws Exception {
-        if (index < 1 || index > slots.length) throw new Exception("Invalid slot index");
-        Card c = slots[index - 1];
-        if (c == null) throw new Exception("Card already bought");
-        if (playerGold < c.getCost()) throw new Exception("Not enough gold");
-        slots[index - 1] = null;
-        return c;
+        if (index < 1 || index > size) throw new Exception("Invalid slot index");
+        Card card = slots.get(index - 1);
+        if (playerGold < card.getCost()) throw new Exception("Not enough gold");
+
+        // Reset the shop immediately after purchase
+        rollByDefault(stage);
+        return card;
     }
 
     public void display() {
         System.out.println("=== SHOP ===");
-        for (int i = 0; i < slots.length; i++) {
-            System.out.printf("%d. %s\n", i+1, slots[i] == null ? "(empty)" : slots[i].toString());
+        for (int i = 0; i < size; i++) {
+            Card card = slots.get(i);
+            System.out.printf("%d. %s\n", i + 1, card == null ? "(empty)" : card.toString());
         }
     }
 }

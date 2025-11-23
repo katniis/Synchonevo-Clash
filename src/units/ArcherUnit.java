@@ -1,4 +1,5 @@
 package units;
+import boss.*;
 
 public class ArcherUnit extends Unit {
     private final int baseHp;
@@ -17,9 +18,9 @@ public class ArcherUnit extends Unit {
     protected int baseAttack() { return baseAtk; }
 
     @Override
-    public String attack(Unit target) {
+    public String attack(Boss boss) {
         int dmg = computeDamage();
-        target.takeDamage(dmg);
-        return String.format("%s fires a piercing arrow at %s for %d damage.", displayName(), target.displayName(), dmg);
+        boss.bossTakeDamage(dmg);
+        return String.format("%s fires a piercing arrow at %s for %d damage.", displayName(), boss.getBossName(), dmg);
     }
 }

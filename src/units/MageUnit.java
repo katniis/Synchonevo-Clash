@@ -1,5 +1,5 @@
 package units;
-
+import boss.*;
 public class MageUnit extends Unit {
     private final int baseHp;
     private final int baseAtk;
@@ -17,10 +17,10 @@ public class MageUnit extends Unit {
     protected int baseAttack() { return baseAtk; }
 
     @Override
-    public String attack(Unit target) {
+    public String attack(Boss boss) {
         // flavor text
         int dmg = computeDamage();
-        target.takeDamage(dmg);
-        return String.format("%s casts a spell on %s for %d damage.", displayName(), target.displayName(), dmg);
+        boss.bossTakeDamage(dmg);
+        return String.format("%s casts a spell on %s for %d damage.", displayName(), boss.getBossName(), dmg);
     }
 }

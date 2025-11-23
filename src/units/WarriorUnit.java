@@ -1,4 +1,5 @@
 package units;
+import boss.*;
 
 public class WarriorUnit extends Unit {
     private final int baseHp;
@@ -17,7 +18,7 @@ public class WarriorUnit extends Unit {
     protected int baseAttack() { return baseAtk; }
 
     @Override
-    public String attack(Unit target) {
-        return super.attack(target); // same behavior, message consistent
+    public String attack(Boss boss) {
+        return super.attack(boss); // same behavior, message consistent
     }
 }

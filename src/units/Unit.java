@@ -1,11 +1,12 @@
 package units;
 
 import java.util.Random;
+import boss.*;
 
 public abstract class Unit {
     protected String name;
-    protected String classType; // WARRIOR, MAGE, ARCHER, TANK
-    protected int star = 1; // 1..3
+    protected String classType;     // WARRIOR, MAGE, ARCHER, TANK
+    protected int star = 1;         // by default set star = 1
     protected int maxHp;
     protected int hp;
     protected int attack;
@@ -30,15 +31,16 @@ public abstract class Unit {
     }
 
     // Apply star scaling
-    public void setStar(int s) {
-        if (s < 1) s = 1;
-        if (s > 3) s = 3;
-        this.star = s;
+    public void setStar(int star) {
+        if (star < 1) star = 1;
+        if (star > 3) star = 3;
+        this.star = star;
         // scale stats per spec: 2★ => +30% HP, +20% ATK; 3★ => +60% HP, +40% ATK
         double hpMultiplier = 1.0;
         double atkMultiplier = 1.0;
-        if (s == 2) { hpMultiplier = 1.3; atkMultiplier = 1.2; }
-        if (s == 3) { hpMultiplier = 1.6; atkMultiplier = 1.4; }
+        if (star == 2) { hpMultiplier = 1.3; atkMultiplier = 1.2; }
+        if (star == 3) { hpMultiplier = 1.6; atkMultiplier = 1.4; }
+
         this.maxHp = (int)Math.round((double)baseHp() * hpMultiplier);
         this.hp = Math.min(this.hp, this.maxHp);
         this.attack = (int)Math.round((double)baseAttack() * atkMultiplier);
@@ -71,6 +73,7 @@ public abstract class Unit {
         }
     }
 
+    // Damage
     public int computeDamage() {
         boolean crit = RNG.nextDouble() < critRate;
         int dmg = attack;
@@ -79,11 +82,11 @@ public abstract class Unit {
     }
 
     // Default attack: target the boss (single target model) - subclasses may override
-    public String attack(Unit target) {
+    public String attack(Boss boss) {
         if (!isAlive()) return name + " is dead and can't attack.";
         int dmg = computeDamage();
-        target.takeDamage(dmg);
-        return String.format("%s attacks %s for %d damage.", displayName(), target.displayName(), dmg);
+        boss.bossTakeDamage(dmg);
+        return String.format("%star attacks %star for %d damage.", displayName(), boss.getBossName(), dmg);
     }
 
     public String displayName() {
@@ -93,7 +96,7 @@ public abstract class Unit {
 
     @Override
     public String toString() {
-        return String.format("[%s | Class:%s | ⭐%d | HP:%d/%d | ATK:%d | SPD:%d | CR:%.2f | CD:%.2f | Alive:%b]",
+        return String.format("[%star | Class:%star | ⭐%d | HP:%d/%d | ATK:%d | SPD:%d | CR:%.2f | CD:%.2f | Alive:%b]",
             name, classType, star, hp, maxHp, attack, speed, critRate, critDamage, isAlive());
     }
 }

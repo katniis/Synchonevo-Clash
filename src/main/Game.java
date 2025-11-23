@@ -2,6 +2,7 @@ package main;
 
 import cards.*;
 import units.*;
+import boss.*;
 import ui.Display;
 import utils.Utils;
 
@@ -10,20 +11,24 @@ public class Game {
     private Player player;
     private Display display;
     private int stage = 1;
-    private Unit boss;
+    private Boss boss;
 
     public Game() {
-        shop = new Shop(5);
-        player = new Player("Player", 50, 6);
+        shop = new Shop(stage);
+        player = new Player("Player");
         display = new Display(this);
-        spawnBoss();
+        //spawnBoss();
     }
 
+    public int getStage(){ return stage; }
+
+    /* 
     private void spawnBoss() {
         int hp = 500 + (stage * 200);
         int atk = 20 + (stage * 5);
         boss = new TankUnit("Boss", hp, atk, 6, 0.05, 1.3);
     }
+    */
 
     public void start() {
         Utils.clearScreen();
@@ -34,10 +39,10 @@ public class Game {
             try {
                 if (choice == 1) {
                     int slot = Utils.promptInt("Buy which slot (1-5):", 1, 5);
-                    Card c = shop.buy(slot, player.getGold());
-                    player.spendGold(c.getCost());
+                    Card card = shop.buy(slot, player.getGold());
+                    player.spendGold(card.getCost());
                     // bought card always goes to bench first
-                    if (!player.addToBench(c)) {
+                    if (!player.addToBench(card)) {
                         System.out.println("Bench full! Card discarded.");
                     }
                 } else if (choice == 2) {
