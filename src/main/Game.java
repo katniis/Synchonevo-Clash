@@ -52,20 +52,7 @@ public class Game {
                     player.printBench();
                     System.out.println("Deploy from bench to board not implemented in this demo.");
                 } else if (choice == 4) {
-                    // simple battle simulation vs boss
-                    BattleSim sim = new BattleSim(player, boss);
-                    boolean win = sim.runBattle();
-                    if (win) {
-                        System.out.println("You won! Proceeding to next stage.");
-                        player.addGold(5);
-                        // heal all units if any (bench units are cards; real units would be on board)
-                        stage++;
-                        spawnBoss();
-                        shop.roll(stage);
-                    } else {
-                        System.out.println("You lost. Game over.");
-                        break;
-                    }
+                    // Battle Here
                 } else {
                     System.out.println("Goodbye.");
                     break;

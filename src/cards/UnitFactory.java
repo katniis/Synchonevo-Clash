@@ -40,7 +40,7 @@ public class UnitFactory {
             default:
                 throw new IllegalArgumentException("Unknown type: " + type);
         }
-        u.setStar(star);
+        //u.setStar(star);
         return u;
     }
 
