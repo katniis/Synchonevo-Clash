@@ -1,7 +1,11 @@
 package cards;
 
 import units.Unit;
-//import cards.UnitFactory;
+import utils.Utils;
+
+import javax.swing.text.Utilities;
+
+import cards.UnitFactory;
 
 public class Card {
     private String name;
@@ -22,7 +26,7 @@ public class Card {
         return UnitFactory.createUnit(type, star);
     }
 
-    public String getName() { return name; }
+    public String getName() { return Utils.formatEnumName(type); }
     public int getCost() { return cost; }
     public UnitType getType() { return type; }
     public int getStar() { return star; }

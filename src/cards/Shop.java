@@ -16,22 +16,22 @@ public class Shop {
     public void roll(int stage) {
         slots.clear();
         for (int i = 0; i < size; i++) {
-            UnitType t = randomType();
+            UnitType type = randomType();
             int star = chooseStar(stage);
             int cost = 1 + (star - 1); // simple cost mapping
             String desc = "";
-            slots.add(UnitFactory.createCard(t, star, cost, desc));
+            slots.add(UnitFactory.createCard(type, star, cost, desc));
         }
     }
 
     private void rollByDefault(int stage) {
         slots.clear();
         for (int i = 0; i < size; i++) {
-            UnitType t = randomType();
+            UnitType type = randomType();
             int star = chooseStar(stage);
             int cost = 1 + (star - 1); // simple cost mapping
             String desc = "";
-            slots.add(UnitFactory.createCard(t, star, cost, desc));
+            slots.add(UnitFactory.createCard(type, star, cost, desc));
         }
     }
 

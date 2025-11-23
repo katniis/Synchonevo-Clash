@@ -2,6 +2,8 @@ package utils;
 
 import java.util.Scanner;
 
+import cards.UnitType;
+
 public class Utils {
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -32,5 +34,29 @@ public class Utils {
                 System.out.println("Invalid input. Enter a number.");
             }
         }
+    }
+
+    /** 
+     * Pause execution for the given milliseconds.
+     * @param ms milliseconds to sleep
+     */
+    public static void delay(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // reset interrupt status
+            System.out.println("Delay interrupted!");
+        }
+    }
+
+    public static String formatEnumName(UnitType type) {
+        // replace underscores with spaces and capitalize first letters
+        String raw = type.name();               // e.g., "DEATH_KNIGHT"
+        String[] words = raw.split("_");
+        StringBuilder sb = new StringBuilder();
+        for (String w : words) {
+            sb.append(w.charAt(0)).append(w.substring(1).toLowerCase()).append(" ");
+        }
+        return sb.toString().trim();            // "Death Knight"
     }
 }

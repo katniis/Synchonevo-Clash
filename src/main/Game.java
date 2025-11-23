@@ -33,16 +33,22 @@ public class Game {
     public void start() {
         Utils.clearScreen();
         System.out.println("Welcome to Synchonevo Clash (CLI)");
+        Utils.delay(5000);
         while (true) {
+            Utils.delay(1500);
+            Utils.clearScreen();
             display.renderShop(shop, player, stage);
             int choice = Utils.promptInt("Choose: 1-Buy 2-Roll 3-Deploy 4-Battle 0-Exit", 0, 4);
             try {
                 if (choice == 1) {
                     int slot = Utils.promptInt("Buy which slot (1-5):", 1, 5);
                     Card card = shop.buy(slot, player.getGold());
-                    player.spendGold(card.getCost());
-                    // bought card always goes to bench first
-                    if (!player.addToBench(card)) {
+
+                    if(player.addToBench(card)){
+                        player.spendGold(card.getCost());
+                        System.out.println(card.getName() + " added to bench!");
+
+                    }else{
                         System.out.println("Bench full! Card discarded.");
                     }
                 } else if (choice == 2) {
@@ -54,6 +60,7 @@ public class Game {
                         shop.roll(stage);
                     }
                 } else if (choice == 3) {
+                    // Summon Units when deployed
                     player.printBench();
                     System.out.println("Deploy from bench to board not implemented in this demo.");
                 } else if (choice == 4) {

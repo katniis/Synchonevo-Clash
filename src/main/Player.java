@@ -4,6 +4,7 @@ import java.util.*;
 
 import cards.Card;
 //import units.Unit;
+import utils.Utils;
 
 public class Player {
     private String name;
@@ -19,20 +20,20 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.gold = 10;
+        this.gold = 15;
     }
 
     public boolean addToDeck(Card card) {
         if (deckCount >= deckSize) return false;
         deck.add(deckCount, card);
-        deckCount++;
+        ++deckCount;
         return true;
     }
 
     public boolean addToBench(Card card) {
         if (benchCount >= benchSize) return false;
         bench.add(benchCount, card);
-        benchCount++;
+        ++benchCount;
         return true;
     }
 
@@ -58,7 +59,7 @@ public class Player {
     public void printBench() {
         System.out.println(name + "'s Bench:");
         for (int i = 0; i < benchSize; i++) {
-            System.out.printf("%d: %s\n", i+1, (i < benchCount && bench.get(i) != null) ? bench.get(i) : "");
+            System.out.printf("%d: %s\n", i+1, (i < benchCount && bench.get(i) != null) ? Utils.formatEnumName(bench.get(i).getType()) : "");
         }
     }
 }
