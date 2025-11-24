@@ -1,86 +1,94 @@
 package main;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import cards.Card;
 import units.Unit;
-import utils.Utils;
 
 public class Player {
+
     private String name;
     private int gold;
 
-    // arrays for deck and bench
-    private List<Unit> deck = new ArrayList<>();    // Entity
-    private List<Card> bench = new ArrayList<>();   // Template
-    private int deckSize = 6;       // Maximum units can be placed in the board
-    private int benchSize = 9;     // Maxiumum units player can hold
-    private int deckCount = 0;
-    private int benchCount = 0;
-    private int position = -1;  //default
+    // Bench = Cards waiting
+    private List<Card> bench = new ArrayList<>();
+    private int benchSize = 9;
 
+    // Board = actual Units placed on 3×3 grid
+    private Unit[] board = new Unit[9];  // INDEX 0–8
 
     public Player(String name) {
         this.name = name;
         this.gold = 15;
     }
 
-    public boolean addToDeck(Unit unit) {
-        if (deckCount >= deckSize) return false;
-        deck.add(deckCount, unit);
-        ++deckCount;
-        return true;
-    }
-
+    // Bench Handling
     public boolean addToBench(Card card) {
-        if (benchCount >= benchSize) return false;
-        bench.add(benchCount, card);
-        ++benchCount;
+        if (bench.size() >= benchSize) return false;
+        bench.add(card);
         return true;
     }
 
     public Card removeFromBench(int index) {
-        if (index < 0 || index >= benchCount) return null;
-        Card removed = bench.remove(index); // automatically shifts elements
-        benchCount--;
-        return removed;
-    }
-
-
-    public boolean deployUnit(int index, int position){
-        
-        // Check if bench index is valid
-        if(index < 0 || index >= benchCount) return false;
-        
-        // Check if main board (deck) has space
-        if (deckCount >= deckSize) return false;
-        
-        // get card from bench
-        Card card = bench.get(index);
-        Unit unit = card.summonUnit();
-
-        // add unit on the deck
-        addToDeck(unit);
-
-        // remove the card from the bench
-        removeFromBench(index);
-        System.out.println(unit.displayName() + " deployed to main board!");
-        return true;
+        if (index < 0 || index >= bench.size()) return null;
+        return bench.remove(index);
     }
 
     public List<Card> getBench() { return bench; }
-    public List<Unit> getDeck() { return deck; }
-    public int getBenchCount() { return benchCount; }
+    public int getBenchCount() { return bench.size(); }
 
-    public int getGold() { return gold; }
-    public void addGold(int amount) { gold += amount; }
-    public void spendGold(int amount) { gold -= amount; }
+
+    // Board Handling (3×3)
+    public Unit[] getBoard() { return board; }
+
+    /** Deploy from bench slot → board position (1–9) */
+    public boolean deploy(int benchIndex, int pos) {
+        pos -= 1;
+        if (benchIndex < 0 || benchIndex >= bench.size()) return false;
+        if (pos < 0 || pos >= 9) return false;
+        if (board[pos] != null) return false; // must be empty
+
+        Card card = bench.get(benchIndex);
+        Unit summoned = card.summonUnit();
+        board[pos] = summoned;
+        bench.remove(benchIndex);
+
+        return true;
+    }
+
+    /** Move a unit from one board tile to another */
+    public boolean move(int fromPos, int toPos) {
+        fromPos -= 1;
+        toPos -= 1;
+
+        if (fromPos < 0 || fromPos >= 9) return false;
+        if (toPos < 0 || toPos >= 9) return false;
+
+        if (board[fromPos] == null) return false;
+        if (board[toPos] != null) return false;
+
+        board[toPos] = board[fromPos];
+        board[fromPos] = null;
+        return true;
+    }
+
+    /** Swap two unit positions */
+    public boolean swap(int posA, int posB) {
+        posA -= 1;
+        posB -= 1;
+
+        if (posA < 0 || posA >= 9) return false;
+        if (posB < 0 || posB >= 9) return false;
+
+        Unit temp = board[posA];
+        board[posA] = board[posB];
+        board[posB] = temp;
+        return true;
+    }
 
     public String getName() { return name; }
-
-    public int getDeckSize() { return deckSize; }
-    public int getBenchSize() { return benchSize; }
-    
-    public void setPosition() { return; }
-    public int getPosition() {return position; }
+    public int getGold() { return gold; }
+    public void spendGold(int x) { gold -= x; }
+    public void addGold(int x) { gold += x; }
 }

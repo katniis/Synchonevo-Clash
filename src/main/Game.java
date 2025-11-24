@@ -62,13 +62,26 @@ public class Game {
                         shop.roll(stage);
                     }
                 } else if (choice == 3) {
-                    // implement put in positon
-                    // implement change position on deck
-                    // impleement put back units on deck to bench
-                    System.out.println("deplyement");
-                    int index = Utils.promptInt("pick number", 1, 9);
-                    int position = Utils.promptInt("position", 1, 9);
-                    player.deployUnit(index - 1, position);
+                    System.out.println("1. Deploy");
+                    System.out.println("2. Move");
+                    System.out.println("3. Swap");
+                    int t = Utils.promptInt("Select action:", 1, 3);
+
+                    if (t == 1) {
+                        int b = Utils.promptInt("Bench index:", 1, player.getBenchCount());
+                        int p = Utils.promptInt("Board position (1–9):", 1, 9);
+                        if (!player.deploy(b - 1, p)) System.out.println("Deploy failed!");
+                    }
+                    else if (t == 2) {
+                        int f = Utils.promptInt("Move FROM (1–9):", 1, 9);
+                        int to = Utils.promptInt("Move TO (1–9):", 1, 9);
+                        if (!player.move(f, to)) System.out.println("Move failed!");
+                    }
+                    else if (t == 3) {
+                        int a = Utils.promptInt("Swap A (1–9):", 1, 9);
+                        int b2 = Utils.promptInt("Swap B (1–9):", 1, 9);
+                        if (!player.swap(a, b2)) System.out.println("Swap failed!");
+                    }
                 } else if (choice == 4) {
                     // Battle Here
                 } else {

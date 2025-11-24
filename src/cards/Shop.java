@@ -1,12 +1,12 @@
 package cards;
 
 import java.util.*;
+import main.Player;
 public class Shop {
     private List<Card> slots = new ArrayList<>();
     private int size = 4; // maximum number of cards can be rolled
     private Random rand = new Random();
     private int stage;
-
     public Shop(int stage) {
         this.stage = stage;
         rollByDefault(stage);
@@ -73,8 +73,8 @@ public class Shop {
         return card;
     }
 
-    public void display() {
-        System.out.println(" Shop");
+    public void display(Player player) {
+        System.out.println(" Shop | Gold: " + player.getGold());
         for (int i = 0; i < size; i++) {
             Card card = slots.get(i);
             if ((i + 1) % 3 == 0){
