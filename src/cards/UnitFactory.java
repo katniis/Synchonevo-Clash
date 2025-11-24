@@ -20,7 +20,7 @@ public class UnitFactory {
                 u = new MageUnit("Warlock", 70, 20, 6, 0.08, 1.6);
                 break;
             case ELF:
-                u = new ArcherUnit("ELF", 65, 12, 9, 0.12, 1.6);
+                u = new ArcherUnit("Elf", 65, 12, 9, 0.12, 1.6);
                 break;
             case HUNTER:
                 u = new ArcherUnit("Hunter", 75, 15, 10, 0.13, 1.7);

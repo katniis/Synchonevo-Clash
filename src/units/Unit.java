@@ -90,8 +90,8 @@ public abstract class Unit {
     }
 
     public String displayName() {
-        if (!alive) return "💀 " + name;
-        return name + "★" + star;
+        if (!alive) return "skull " + name;
+        return name + "*" + star;
     }
 
     @Override

@@ -74,10 +74,13 @@ public class Shop {
     }
 
     public void display() {
-        System.out.println("=== SHOP ===");
+        System.out.println(" Shop");
         for (int i = 0; i < size; i++) {
             Card card = slots.get(i);
-            System.out.printf("%d. %s\n", i + 1, card == null ? "(empty)" : card.toString());
+            if ((i + 1) % 3 == 0){
+                System.out.println();
+            }
+            System.out.printf("\t[%d] %s\t", i + 1, card == null ? " " : card.toString());
         }
     }
 }

@@ -10,8 +10,10 @@ public class Game {
     private Shop shop;
     private Player player;
     private Display display;
-    private int stage = 1;
     private Boss boss;
+    private Unit unit;
+    private int stage = 1;
+    
 
     public Game() {
         shop = new Shop(stage);
@@ -33,11 +35,11 @@ public class Game {
     public void start() {
         Utils.clearScreen();
         System.out.println("Welcome to Synchonevo Clash (CLI)");
-        Utils.delay(5000);
+        //Utils.delay(1000);
         while (true) {
             Utils.delay(1500);
             Utils.clearScreen();
-            display.renderShop(shop, player, stage);
+            display.mainUI(shop, player, unit, boss, stage);
             int choice = Utils.promptInt("Choose: 1-Buy 2-Roll 3-Deploy 4-Battle 0-Exit", 0, 4);
             try {
                 if (choice == 1) {
@@ -60,9 +62,13 @@ public class Game {
                         shop.roll(stage);
                     }
                 } else if (choice == 3) {
-                    // Summon Units when deployed
-                    player.printBench();
-                    System.out.println("Deploy from bench to board not implemented in this demo.");
+                    // implement put in positon
+                    // implement change position on deck
+                    // impleement put back units on deck to bench
+                    System.out.println("deplyement");
+                    int index = Utils.promptInt("pick number", 1, 9);
+                    int position = Utils.promptInt("position", 1, 9);
+                    player.deployUnit(index - 1, position);
                 } else if (choice == 4) {
                     // Battle Here
                 } else {
@@ -73,5 +79,9 @@ public class Game {
                 System.out.println("Error: " + ex.getMessage());
             }
         }
+    }
+
+    public void startBattle(){
+        
     }
 }
