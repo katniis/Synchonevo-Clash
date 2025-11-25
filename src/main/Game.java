@@ -143,7 +143,7 @@ public class Game {
                 } else if (choice == 4) {
                     if (boss == null || !boss.bossIsAlive()) spawnBoss();
                     startBattle();
-                } else {
+                } else if(choice == 0){
                     System.out.println(" Goodbye.");
                     break;
                 }
@@ -196,6 +196,7 @@ public class Game {
         if (!boss.bossIsAlive()) {
             battleLog = "You defeated the boss!";
             displayBattle(board);
+            healAll(player);
             System.out.println();
             player.addGold(5 + (stage * 2));
             Utils.delay(1000);
@@ -206,6 +207,12 @@ public class Game {
             System.out.println("Game Over");
             gameover = true;
             Utils.delay(1000);
+        }
+    }
+
+    void healAll(Player player){
+        for(Unit u : player.getBoard()){
+            if(u != null) { u.healToFull(); }
         }
     }
 
