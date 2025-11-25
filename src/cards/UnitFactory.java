@@ -3,35 +3,49 @@ package cards;
 import units.*;
 
 public class UnitFactory {
-
-    public static Unit createUnit(UnitType type) {
+    // create a Unit instance by UnitType and star
+    public static Unit createUnit(UnitType type, int star) {
+        Unit u;
         switch (type) {
-            //Warrior Cards
             case DWARF:
-                return new WarriorUnit("Warrior","Dwarf", 40, 8, "swings his axe");
-            case FIGHTER:
-                return new WarriorUnit("Warrior","Fighter", 45, 10, "charges and strikes");
-            case HEAVY_SWORDMAN:
-                return new WarriorUnit("Warrior","Heavy Swordman", 55, 12, "slashes with his blade");
-            //Archer Cards
-            case ELF:
-                return new ArcherUnit("Archer", "Elf", 28, 9, "fires a piercing arrow");
-            case HUNTER:
-                return new ArcherUnit("Archer","Hunter", 35, 11, "shoots twin arrows");
-            //Mage Cards
-            case MAGE:
-                return new MageUnit("Mage","Mage", 25, 10, "casts a fireball");
-            case WARLOCK:
-                return new MageUnit("Mage","Warlock", 30, 14, "unleashes dark energy");
-            case WYRMLINGS:
-                return new MageUnit("Mage","Wyrmlings", 30, 13, "breathes fire");
-            //Tank Cards
+                u = new WarriorUnit("Dwarf", 80, 14, 8, 0.05, 1.5);
+                break;
             case ELDER_DWARF:
-                return new TankUnit("Tank","Elder Dwarf", 60, 12, "smashes with his hammer");
+                u = new TankUnit("Elder Dwarf", 120, 10, 5, 0.03, 1.4);
+                break;
+            case MAGE:
+                u = new MageUnit("Mage", 60, 18, 7, 0.10, 1.7);
+                break;
+            case WARLOCK:
+                u = new MageUnit("Warlock", 70, 20, 6, 0.08, 1.6);
+                break;
+            case ELF:
+                u = new ArcherUnit("Elf", 65, 12, 9, 0.12, 1.6);
+                break;
+            case HUNTER:
+                u = new ArcherUnit("Hunter", 75, 15, 10, 0.13, 1.7);
+                break;
+            case FIGHTER:
+                u = new WarriorUnit("Fighter", 90, 16, 9, 0.07, 1.5);
+                break;
+            case HEAVY_SWORDMAN:
+                u = new TankUnit("Heavy Swordman", 140, 12, 4, 0.02, 1.3);
+                break;
+            case WYRMLINGS:
+                u = new MageUnit("Wyrmlings", 70, 22, 8, 0.08, 1.6);
+                break;
             case WYVERN:
-                return new TankUnit("Tank","Wyvern", 50, 16, "dives and crushes the enemy");
+                u = new TankUnit("Wyvern", 160, 28, 7, 0.05, 1.5);
+                break;
             default:
-                throw new IllegalArgumentException("Unknown unit type: " + type);
+                throw new IllegalArgumentException("Unknown type: " + type);
         }
+        u.setStar(star);
+        return u;
+    }
+
+    // create a Card wrapper for shop
+    public static Card createCard(UnitType type, int star, int cost, String description) {
+        return new Card(type.name(), cost, description, type, star);
     }
 }

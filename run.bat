@@ -1,6 +1,3 @@
 @echo off
-echo Compiling...
-javac src/cards/*.java src/units/*.java src/ui/*.java src/utils/*.java src/main/*.java
-echo Running game...
+javac src/cards/*.java src/boss/*.java src/units/*.java src/ui/*.java src/utils/*.java src/main/*.java
 java -cp src main.Main
-pause
