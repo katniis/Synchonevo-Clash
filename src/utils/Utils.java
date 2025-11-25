@@ -59,4 +59,14 @@ public class Utils {
         }
         return sb.toString().trim();            // "Death Knight"
     }
+
+    public static UnitType stringToUnitType(String name) {
+        if (name == null) return null;
+        try {
+            return UnitType.valueOf(name.toUpperCase().replace(" ", "_"));
+        } catch (IllegalArgumentException e) {
+            return null; // no matching enum
+        }
+    }
+
 }
