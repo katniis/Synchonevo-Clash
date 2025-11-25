@@ -72,6 +72,10 @@ public class Shop {
         rollByDefault(stage);
         return card;
     }
+    public Card peek(int slot) {
+        if (slot < 1 || slot > slots.size()) return null;
+        return slots.get(slot - 1);
+    }
 
     public void display(Player player) {
         System.out.println(" Shop | Gold: " + player.getGold());
