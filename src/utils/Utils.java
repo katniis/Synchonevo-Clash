@@ -29,6 +29,7 @@ public class Utils {
                 int val = Integer.parseInt(line.trim());
                 if (val < min || val > max) {
                     System.out.printf("Please enter a number between %d and %d.\n", min, max);
+                    return 0;
                 } else return val;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Enter a number.");

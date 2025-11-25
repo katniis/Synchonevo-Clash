@@ -39,7 +39,7 @@ public class Game {
             Utils.delay(500);
             Utils.clearScreen();
             display.mainUI(shop, player, null, boss, stage);
-            System.out.println(" Choose: [1] Buy   [2] Roll   [3] Deploy   [4] Battle   [0] Exit");
+            System.out.println(" Choose: [1] Buy   [2] Roll   [3] Deploy   [4] Battle   [0] Exit | Back");
             int choice = Utils.promptInt(" " + player.getName() + ": ", 0, 4);
             
             try {
