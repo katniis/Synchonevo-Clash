@@ -90,13 +90,13 @@ public abstract class Unit {
     }
 
     public String displayName() {
-        if (!alive) return "skull";
-        return name + " *" + star;
+        if (!alive) return "💀";
+        return name + " ★ " + star;
     }
 
     @Override
     public String toString() {
-        return String.format("[%star | Class:%star | ⭐%d | HP:%d/%d | ATK:%d | SPD:%d | CR:%.2f | CD:%.2f | Alive:%b]",
+        return String.format("[%star | Class:%star | ★%d | HP:%d/%d | ATK:%d | SPD:%d | CR:%.2f | CD:%.2f | Alive:%b]",
             name, classType, star, hp, maxHp, attack, speed, critRate, critDamage, isAlive());
     }
 }

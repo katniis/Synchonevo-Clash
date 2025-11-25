@@ -7,6 +7,7 @@ public class Shop {
     private int size = 4; // maximum number of cards can be rolled
     private Random rand = new Random();
     private int stage;
+    
     public Shop(int stage) {
         this.stage = stage;
         rollByDefault(stage);

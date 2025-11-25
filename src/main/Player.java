@@ -5,7 +5,9 @@ import java.util.List;
 
 import cards.Card;
 import cards.UnitFactory;
+import cards.UnitType;
 import units.Unit;
+import utils.*;
 
 public class Player {
 
@@ -74,19 +76,83 @@ public class Player {
         return true;
     }
 
-    /** Swap two unit positions */
-    public boolean swap(int posA, int posB) {
-        posA -= 1;
-        posB -= 1;
+    /** Swaps */
+    public boolean swapBoardToBoard(int a, int b) {
+    a--; b--;
+    if (a < 0 || a >= 9 || b < 0 || b >= 9) return false;
+    Unit tmp = board[a];
+    board[a] = board[b];
+    board[b] = tmp;
+    return true;
+    }
 
-        if (posA < 0 || posA >= 9) return false;
-        if (posB < 0 || posB >= 9) return false;
+    public boolean moveBoardToBench(int pos) {
+        pos--;
+        if (pos < 0 || pos >= 9) return false;
+        Unit u = board[pos];
+        if (u == null) return false;
 
-        Unit temp = board[posA];
-        board[posA] = board[posB];
-        board[posB] = temp;
+        if (bench.size() >= benchSize) return false;
+
+        UnitType type = Utils.stringToUnitType(u.getName());
+        int cost = (int)((u.getStar() - 1) * 1.5);
+        if (type != null) {
+            Card card = UnitFactory.createCard(type, u.getStar(), cost, "");
+            bench.add(card);
+        } else {
+            System.out.println("Error: Could not convert unit name to UnitType.");
+        }
+        board[pos] = null;
         return true;
     }
+
+    public boolean moveBenchToBoard(int bSlot, int boardPos) {
+        bSlot--; 
+        boardPos--;
+
+        if (boardPos < 0 || boardPos >= 9) return false;
+        if (bSlot < 0 || bSlot >= bench.size()) return false;
+
+        Card card = bench.get(bSlot);
+        if (card == null) return false;
+
+        Unit newUnit = card.summonUnit();
+
+        // if board empty → place
+        if (board[boardPos] == null) {
+            board[boardPos] = newUnit;
+            bench.remove(bSlot);
+            return true;
+        }
+
+        // else swap: convert existing board unit back to card
+        Unit tempUnit = board[boardPos];
+        board[boardPos] = newUnit;
+        UnitType type = Utils.stringToUnitType(tempUnit.getName());
+        int cost = (int)((tempUnit.getStar() - 1) * 1.5);
+
+        Card tempCard = UnitFactory.createCard(
+            type,
+            tempUnit.getStar(),
+            cost,
+            "" // description can be empty or filled if needed
+        );
+        bench.set(bSlot, tempCard);
+
+        return true;
+    }
+
+
+    public boolean swapBenchToBench(int a, int b) {
+        a--; b--;
+        if (a < 0 || a >= bench.size() || b < 0 || b >= bench.size()) return false;
+
+        Card tmp = bench.get(a);
+        bench.set(a, bench.get(b));
+        bench.set(b, tmp);
+        return true;
+    }
+
 
     // Auto Merge Logic
     private void autoMergeBench() {

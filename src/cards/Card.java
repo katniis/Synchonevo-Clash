@@ -33,6 +33,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return String.format("%s *%d [%dg]", Utils.formatEnumName(type), star, cost);
+        return String.format("%s ★ %d [%dg]", Utils.formatEnumName(type), star, cost);
     }
 }

@@ -71,7 +71,7 @@ public class Display {
         for (int i = 0; i < count; i++) {
             int star = bench.get(i).getStar();
             String name = (bench.get(i) != null) ? bench.get(i).getName() : "";
-            System.out.printf("\t%d: %s [*%d]\t", i + 1, name, star);
+            System.out.printf("\t%d: %s [★ %d]\t", i + 1, name, star);
 
             if ((i + 1) % 3 == 0) System.out.println();
         }

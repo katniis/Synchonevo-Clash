@@ -82,18 +82,64 @@ public class Game {
 
                     if (t == 1) {
                         int b = Utils.promptInt(" Bench index:", 1, player.getBenchCount());
-                        int p = Utils.promptInt(" Board position (1-9):", 1, 9);
+                        int p = Utils.promptInt(" Board position [1-9]:", 1, 9);
                         if (!player.deploy(b - 1, p)) System.out.println(" Deploy failed!");
                     } else if (t == 2) {
                         int f = Utils.promptInt(" Move FROM [1-9]:", 1, 9);
                         int to = Utils.promptInt(" Move TO [1-9]:", 1, 9);
                         if (!player.move(f, to)) System.out.println(" Move failed!");
-                    } else if (t == 3) {
-                        int a = Utils.promptInt(" Swap A [1-9]:", 1, 9);
-                        int b2 = Utils.promptInt(" Swap B [1-9]:", 1, 9);
-                        if (!player.swap(a, b2)) System.out.println(" Swap failed!");
-                    }
+                    }else if (t == 3) {
+                        System.out.println(" Swap Options: ");
+                        System.out.println(" 1. From BOARD");
+                        System.out.println(" 2. From BENCH");
+                        int origin = Utils.promptInt(" Choose origin:", 1, 2);
 
+                        if (origin == 1) {  
+                            // =============================
+                            // FROM BOARD
+                            // =============================
+                            int fromBoard = Utils.promptInt(" Select board slot [1-9]:", 1, 9);
+
+                            System.out.println(" Move to:");
+                            System.out.println(" 1. Board (Swap)");
+                            System.out.println(" 2. Bench (Place Back)");
+                            int target = Utils.promptInt(" Choose:", 1, 2);
+
+                            if (target == 1) {
+                                int toBoard = Utils.promptInt(" Swap with board slot [1-9]:", 1, 9);
+                                if (!player.swapBoardToBoard(fromBoard, toBoard)) {
+                                    System.out.println(" Swap failed!");
+                                }
+                            } else {
+                                if (!player.moveBoardToBench(fromBoard)) {
+                                    System.out.println(" Move failed! (Bench full?)");
+                                }
+                            }
+
+                        } else {
+                            // =============================
+                            // FROM BENCH
+                            // =============================
+                            int fromBench = Utils.promptInt(" Select bench slot:", 1, 9);
+
+                            System.out.println(" Move to:");
+                            System.out.println(" 1. Board (Place / Swap)");
+                            System.out.println(" 2. Bench (Swap)");
+                            int target = Utils.promptInt(" Choose:", 1, 2);
+
+                            if (target == 1) {
+                                int toBoard = Utils.promptInt(" Select board slot [1-9]:", 1, 9);
+                                if (!player.moveBenchToBoard(fromBench, toBoard)) {
+                                    System.out.println(" Move failed!");
+                                }
+                            } else {
+                                int toBench = Utils.promptInt(" Swap with bench slot:", 1, 9);
+                                if (!player.swapBenchToBench(fromBench, toBench)) {
+                                    System.out.println(" Swap failed!");
+                                }
+                            }
+                        }
+                    }
                 } else if (choice == 4) {
                     if (boss == null || !boss.bossIsAlive()) spawnBoss();
                     startBattle();
