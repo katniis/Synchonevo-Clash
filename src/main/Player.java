@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cards.Card;
+import cards.UnitFactory;
 import units.Unit;
 
 public class Player {
@@ -20,13 +21,15 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.gold = 15;
+        this.gold = 100;
     }
 
-    // Bench Handling
+    // ===================== Bench Handling =====================
     public boolean addToBench(Card card) {
         if (bench.size() >= benchSize) return false;
         bench.add(card);
+
+        autoMergeBench();  // merge after adding
         return true;
     }
 
@@ -38,8 +41,7 @@ public class Player {
     public List<Card> getBench() { return bench; }
     public int getBenchCount() { return bench.size(); }
 
-
-    // Board Handling (3×3)
+    // ===================== Board Handling =====================
     public Unit[] getBoard() { return board; }
 
     /** Deploy from bench slot → board position (1–9) */
@@ -54,6 +56,7 @@ public class Player {
         board[pos] = summoned;
         bench.remove(benchIndex);
 
+        autoMergeBoard();  // merge after deployment
         return true;
     }
 
@@ -64,9 +67,7 @@ public class Player {
 
         if (fromPos < 0 || fromPos >= 9) return false;
         if (toPos < 0 || toPos >= 9) return false;
-
-        if (board[fromPos] == null) return false;
-        if (board[toPos] != null) return false;
+        if (board[fromPos] == null || board[toPos] != null) return false;
 
         board[toPos] = board[fromPos];
         board[fromPos] = null;
@@ -87,6 +88,111 @@ public class Player {
         return true;
     }
 
+    // Auto Merge Logic
+    private void autoMergeBench() {
+        boolean merged;
+        do {
+            merged = false;
+            outer: for (int i = 0; i < bench.size(); i++) {
+                Card c1 = bench.get(i);
+                int count = 1;
+                List<Integer> indices = new ArrayList<>();
+                indices.add(i);
+                // check for same name & star
+                for (int j = i + 1; j < bench.size(); j++) {
+                    Card c2 = bench.get(j);
+                    if (c1.getName().equals(c2.getName()) && c1.getStar() == c2.getStar()) {
+                        count++;
+                        indices.add(j);
+                        if (count == 3) break;
+                    }
+                }
+                if (count >= 3) {
+                    // remove 3 cards
+                    // remove from back to front to avoid index shift
+                    for (int k = indices.size() - 1; k >= 0; k--) {
+                        bench.remove((int)indices.get(k));
+                    }
+                    // add upgraded card
+                    Card upgraded = new Card(c1.getName(), c1.getCost(), "", c1.getType(), c1.getStar() + 1);
+                    bench.add(upgraded);
+                    merged = true;
+                    break outer; // restart scan
+                }
+            }
+        } while (merged);
+    }
+
+    private void autoMergeBoard() {
+        boolean merged;
+        do {
+            merged = false;
+            // check each unit on board
+            outer: for (int i = 0; i < 9; i++) {
+                Unit u1 = board[i];
+                if (u1 == null) continue;
+
+                int count = 1;
+                List<Integer> indices = new ArrayList<>();
+                indices.add(i);
+
+                // check other units
+                for (int j = i + 1; j < 9; j++) {
+                    Unit u2 = board[j];
+                    if (u2 != null && u1.getName().equals(u2.getName()) && u1.getStar() == u2.getStar()) {
+                        count++;
+                        indices.add(j);
+                        if (count == 3) break;
+                    }
+                }
+
+                // also check bench for same cards
+                for (int j = 0; j < bench.size(); j++) {
+                    Card c = bench.get(j);
+                    if (u1.getName().equals(c.getName()) && u1.getStar() == c.getStar()) {
+                        count++;
+                        indices.add(9 + j); // mark bench index offset
+                        if (count == 3) break;
+                    }
+                }
+
+                if (count >= 3) {
+                    // remove units/cards involved
+                    int removed = 0;
+                    for (int idx : indices) {
+                        if (idx < 9) {
+                            board[idx] = null;
+                        } else {
+                            bench.remove(idx - 9 - removed);
+                            removed++;
+                        }
+                    }
+                    // summon upgraded unit at first board slot of merged units
+                    int boardPos = indices.get(0) < 9 ? indices.get(0) : findEmptyBoardSlot();
+                    if (boardPos >= 0) {
+                        Unit upgraded = UnitFactory.createUnit(getUnitTypeByName(u1.getName()), u1.getStar() + 1);
+                        board[boardPos] = upgraded;
+                    }
+                    merged = true;
+                    break outer;
+                }
+            }
+        } while (merged);
+    }
+
+    private int findEmptyBoardSlot() {
+        for (int i = 0; i < 9; i++) if (board[i] == null) return i;
+        return -1;
+    }
+
+    private cards.UnitType getUnitTypeByName(String name) {
+        for (cards.UnitType t : cards.UnitType.values()) {
+            if (name.equals(t.name()) || name.equalsIgnoreCase(t.name())) return t;
+        }
+        return null;
+    }
+
+    // Getters & Setters
     public String getName() { return name; }
     public int getGold() { return gold; }
     public void spendGold(int x) { gold -= x; }

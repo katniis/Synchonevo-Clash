@@ -66,10 +66,11 @@ public class Display {
         System.out.println(" Bench:");
 
         for (int i = 0; i < count; i++) {
+            int star = bench.get(i).getStar();
             String name = (bench.get(i) != null) 
                 ? Utils.formatEnumName(bench.get(i).getType()) 
                 : "";
-            System.out.printf("\t%d: %s\t", i + 1, name);
+            System.out.printf("\t%d: %s [*%d]\t", i + 1, name, star);
 
             // After every 3 items, print a new line
             if ((i + 1) % 3 == 0) {
