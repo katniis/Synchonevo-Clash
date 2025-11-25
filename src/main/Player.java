@@ -16,14 +16,15 @@ public class Player {
 
     // Bench = Cards waiting
     private List<Card> bench = new ArrayList<>();
-    private int benchSize = 9;
-
+    private final int benchSize = 9;
+    private final int deckMax = 6;
+    
     // Board = actual Units placed on 3×3 grid
     private Unit[] board = new Unit[9];  // INDEX 0–8
 
     public Player(String name) {
         this.name = name;
-        this.gold = 5;
+        this.gold = 1000;
     }
 
     // ===================== Bench Handling =====================
@@ -52,6 +53,8 @@ public class Player {
         if (benchIndex < 0 || benchIndex >= bench.size()) return false;
         if (pos < 0 || pos >= 9) return false;
         if (board[pos] != null) return false; // must be empty
+
+        if (getBoardUnitCount() >= deckMax) return false; // enforce 6-unit cap
 
         Card card = bench.get(benchIndex);
         Unit summoned = card.summonUnit();
@@ -116,28 +119,28 @@ public class Player {
         Card card = bench.get(bSlot);
         if (card == null) return false;
 
-        Unit newUnit = card.summonUnit();
-
-        // if board empty → place
+        // if board empty → check cap
         if (board[boardPos] == null) {
-            board[boardPos] = newUnit;
+            if (getBoardUnitCount() >= deckMax) return false; // can't place more than 6 units
+            board[boardPos] = card.summonUnit();
             bench.remove(bSlot);
             return true;
         }
 
-        // else swap: convert existing board unit back to card
+        // else swap with existing board unit
         Unit tempUnit = board[boardPos];
-        board[boardPos] = newUnit;
+        board[boardPos] = card.summonUnit();
+
         UnitType type = Utils.stringToUnitType(tempUnit.getName());
         int cost = (int)((tempUnit.getStar() - 1) * 1.5);
 
-        Card tempCard = UnitFactory.createCard(
-            type,
-            tempUnit.getStar(),
-            cost,
-            "" // description can be empty or filled if needed
-        );
-        bench.set(bSlot, tempCard);
+        if (type != null) {
+            Card tempCard = UnitFactory.createCard(type, tempUnit.getStar(), cost, "");
+            bench.set(bSlot, tempCard);
+        } else {
+            System.out.println("Error: Could not convert unit name to UnitType.");
+            return false;
+        }
 
         return true;
     }
@@ -153,7 +156,11 @@ public class Player {
         return true;
     }
 
-
+    private int getBoardUnitCount() {
+        int count = 0;
+        for (Unit u : board) if (u != null) count++;
+        return count;
+    }
     // Auto Merge Logic
     private void autoMergeBench() {
         boolean merged;
