@@ -106,8 +106,60 @@ General-purpose helper functions.
 
 ---
 
-## 🔰 OOP Principle
-test here
+‧₊˚ ┊ **🧩 Object-Oriented Principles (OOP) in Synchonevo Clash)**  
+
+## 💊 Encapsulation  
+Encapsulation is applied throughout the game by keeping sensitive data hidden inside classes and exposing them only through getters/setters.  
+For example:  
+- `Player` keeps **HP**, **gold**, **energy**, and **board** private.  
+- `Unit` keeps its **attack**, **defense**, **HP**, and **position** protected or private.  
+- `Boss` stores its stats internally and exposes controlled interactions such as `takeDamage()` and `bossIsAlive()`.
+
+By bundling data with the methods that operate on it, the system prevents accidental modification and maintains consistent game state.
+
+---
+
+## 💡 Abstraction  
+Abstraction is used to hide complex logic behind simple, clean method calls.  
+Examples include:  
+- `Display` handles all drawing of the board, logs, and UI. The game never needs to know *how* it prints — it just calls `displayBoard()` or `displayBattle()`.  
+- `Utils` abstracts repeated logic like delays, random generation, and formatting.  
+- `UnitFactory` and `BossFactory` hide the complexity of creating units and bosses; the game simply calls `getUnit(type)` or `getBossByStage(stage)` without worrying about instantiation details.
+
+This separation keeps the game flow readable and reduces clutter in the core logic.
+
+---
+
+## 🧬 Inheritance  
+Inheritance is a major part of the game's structure.  
+The base class:
+
+### `Unit`  
+is extended by specialized subclasses such as:  
+- `ArcherUnit`  
+- `MageUnit`  
+- `TankUnit`  
+- `WarriorUnit`
+
+These subclasses inherit core stats and behaviors but override certain methods (e.g., damage multipliers, scaling, and unit-type-specific attributes).
+
+This promotes code reuse and allows new unit types to be added easily without modifying existing logic.
+
+---
+
+## 🎭 Polymorphism  
+Polymorphism is used extensively, especially during combat.
+
+### Examples:
+- Each subclass of `Unit` overrides the `attack()` method with its own behavior, but the battle loop simply calls `u.attack(boss)` — allowing different attack styles to activate depending on the unit type.  
+- `UnitFactory` and `BossFactory` return objects of different subclasses but with the same base type, allowing the program to treat all units and bosses uniformly.  
+- The battle sequence uses a list of `Unit` references while each actual unit acts according to its class-specific implementation.
+
+This enables flexible behaviors while keeping the code clean and unified.
+
+---
+
+
 ---
 
 ## 📌 5. How to Run the Program (Java)
