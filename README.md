@@ -42,8 +42,14 @@ Systems like Display handling, Boss generation, Card creation, and utility funct
 ---
 
 ## 📌 4. Program Structure
-
-
+```
+📂 SynchonevoClash
+└──📂 src/
+  └── 📂 Boss/
+      ├── ☕ Main.java          
+      ├── ☕ Diary.java
+      └── ☕ FileHandler.java
+```
 SynchonevoClash/
 │
 ├── Boss/
