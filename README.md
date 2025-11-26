@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="#-objective">Objective</a> •
-  <a href="#oop">OOP Principle</a>a> •
+  <a href="#oop">OOP Principle</a> •
   <a href="#-features">Features</a> •
   <a href="#-how-to-run">How to run</a> •
   <a href="#-gameplay-mechanics">Mechanics</a> •
