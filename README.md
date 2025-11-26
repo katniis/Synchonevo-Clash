@@ -1,47 +1,46 @@
-# ⚔️ Synchonevo Clash  
-### **Merge Tactics: Turn-Based Strategy Game (Java Edition)**
-## 🎯 Objective
-Defeat the opponent by assembling a powerful army through smart merging, energy management, and strategic decision-making.
+<!-- README.md for Synchonevo Clash -->
+<p align="center">
+  <img alt="logo" src="https://raw.githubusercontent.com/your-repo/synchonevo-clash/main/assets/logo.png" width="160" />
+</p>
+
+<h1 align="center">⚔️ Synchonevo Clash — Merge Tactics</h1>
+
+<p align="center">
+  <em>Turn-based merge strategy — recruit, merge, deploy, and defeat the bosses.</em>
+</p>
+
+<p align="center">
+  <a href="#-objective">Objective</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-how-to-run">How to run</a> •
+  <a href="#-gameplay-mechanics">Mechanics</a> •
+  <a href="#-dev-notes">Dev notes</a> •
+  <a href="#-roadmap">Roadmap</a>
+</p>
 
 ---
 
-## 📌 1. Project Title
-**Synchonevo Clash: Merge Tactics – Turn-Based Strategy Game**
+## 🔰 Objective
+
+Assemble a powerful army by buying cards, deploying units on a **3×3 board**, and merging three identical units to upgrade their star level. Defeat progressively stronger bosses to advance stages.
 
 ---
 
-## 📌 2. Description / Overview
-*Synchonevo Clash* is a Java-based turn-based strategy game where players use a randomized deck of units to battle against an AI opponent.  
-Players can **summon**, **merge**, and **upgrade** units to create powerful formations capable of defeating the enemy.  
+## ✨ Highlights / Features
 
-The game focuses on:  
-- Tactical merging  
-- Energy management  
-- Automated battle phases  
-- Adaptive AI decision-making  
-
-Your goal is to reduce the opponent’s HP to zero by making the most strategic play each round.
-
----
-
-## 📌 3. OOP Concepts Applied
-
-### 🔹 Encapsulation
-Important variables such as HP, energy, stats, and card data are hidden within classes and accessed using getters/setters.
-
-### 🔹 Inheritance
-The **Units** folder contains subclasses like *Archer*, *Mage*, *Tank*, and *Warrior*, all extending a base **Unit** class.
-
-### 🔹 Polymorphism
-Each unit type can override methods such as attack behaviors or stat scaling.  
-Factories (e.g., `UnitFactory`, `BossFactory`) also use polymorphism when generating object instances.
-
-### 🔹 Abstraction
-Systems like Display handling, Boss generation, Card creation, and utility functions are abstracted into separate classes to simplify the core game logic.
+- Console-based, deterministic + randomised gameplay loop.  
+- **3×3 battlefield** (hardcoded display) and a **9-card bench**.  
+- **Board cap:** max **6 units** deployed at any time.  
+- **Merge system:** 3 identical units/cards → upgrade star (1★ → 2★ → 3★).  
+- **Cost scaling:** `scaledCost = baseCost + (star - 1) * 1.5`.  
+- Turn order by **speed**; boss attacks row-targeted or single targets (skips empty cells).  
+- Battle log and per-attack delay for readable combat replay.  
+- Sell units for **half** their cost.  
+- Auto-merge works across bench and board.
 
 ---
 
-## 📌 4. Program Structure
+## 🧩 Project Structure
 
 ```
 SynchonevoClash/
