@@ -141,6 +141,10 @@ public class Game {
                         }
                     }
                 } else if (choice == 4) {
+                    if(!player.hasUnit()){
+                        System.out.println(" No Units Deployed");
+                        continue;
+                    }
                     if (boss == null || !boss.bossIsAlive()) spawnBoss();
                     startBattle();
                 } else if(choice == 0){

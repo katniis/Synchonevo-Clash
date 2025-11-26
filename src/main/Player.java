@@ -43,6 +43,12 @@ public class Player {
 
     public List<Card> getBench() { return bench; }
     public int getBenchCount() { return bench.size(); }
+    public boolean hasUnit() {
+        for (Unit u : board){
+            if(u != null) return true;
+        }
+        return false;
+    }
 
     // ===================== Board Handling =====================
     public Unit[] getBoard() { return board; }
@@ -98,7 +104,7 @@ public class Player {
         if (bench.size() >= benchSize) return false;
 
         UnitType type = Utils.stringToUnitType(u.getName());
-        int cost = (int)((u.getStar() - 1) * 1.5);
+        int cost = (int)Math.round(1 + ((u.getStar() - 1) * 1.5));
         if (type != null) {
             Card card = UnitFactory.createCard(type, u.getStar(), cost, "");
             bench.add(card);
@@ -132,7 +138,7 @@ public class Player {
         board[boardPos] = card.summonUnit();
 
         UnitType type = Utils.stringToUnitType(tempUnit.getName());
-        int cost = (int)((tempUnit.getStar() - 1) * 1.5);
+        int cost = (int)Math.round(1 + ((tempUnit.getStar() - 1) * 1.5));
 
         if (type != null) {
             Card tempCard = UnitFactory.createCard(type, tempUnit.getStar(), cost, "");
