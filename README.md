@@ -42,44 +42,33 @@ Systems like Display handling, Boss generation, Card creation, and utility funct
 ---
 
 ## 📌 4. Program Structure
-```
-📂 SynchonevoClash
-└──📂 src/
-  └── 📂 Boss/
-      ├── ☕ Main.java          
-      ├── ☕ Diary.java
-      └── ☕ FileHandler.java
-```
+
 ```
 SynchonevoClash/
-│
-├── Boss/
-│ ├── Boss.java
-│ └── BossFactory.java
-│
-├── Cards/
-│ ├── Card.java
-│ ├── Shop.java
-│ ├── UnitFactory.java
-│ └── UnitType.java
-│
-├── Main/
-│ ├── Game.java
-│ ├── Main.java
-│ └── Player.java
-│
-├── UI/
-│ └── Display.java
-│
-├── Units/
-│ ├── ArcherUnit.java
-│ ├── MageUnit.java
-│ ├── TankUnit.java
-│ ├── Unit.java
-│ └── WarriorUnit.java
-│
-└── Utils/
-└── Utils.java
+└── 📁 src/
+    ├── 📁 Boss/
+    │   ├── ☕ Boss.java
+    │   └── ☕ BossFactory.java
+    ├── 📁 Cards/
+    │   ├── ☕ Card.java
+    │   ├── ☕ Shop.java
+    │   ├── ☕ UnitFactory.java
+    │   └── ☕ UnitType.java
+    ├── 📁 Main/
+    │   ├── ☕ Game.java
+    │   ├── ☕ Main.java
+    │   └── ☕ Player.java
+    ├── 📁 UI/
+    │   └── ☕ Display.java
+    ├── 📁 Units/
+    │   ├── ☕ ArcherUnit.java
+    │   ├── ☕ MageUnit.java
+    │   ├── ☕ TankUnit.java
+    │   ├── ☕ Unit.java
+    │   └── ☕ WarriorUnit.java
+    └── 📁 Utils/
+        └── ☕ Utils.java
+
 ```
 
 ### 📌 Description of Key Folders
