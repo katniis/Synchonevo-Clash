@@ -159,9 +159,6 @@ This enables flexible behaviors while keeping the code clean and unified.
 
 ---
 
-
----
-
 ## 📌 5. How to Run the Program (Java)
 
 ### ✔️ Step 1 — Open terminal in the project folder
