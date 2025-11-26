@@ -1,5 +1,7 @@
 # ⚔️ Synchonevo Clash  
 ### **Merge Tactics: Turn-Based Strategy Game (Java Edition)**
+## 🎯 Objective
+Defeat the opponent by assembling a powerful army through smart merging, energy management, and strategic decision-making.
 
 ---
 
@@ -151,10 +153,3 @@ We acknowledge and give thanks to:
 - Oracle Java Documentation  
 - Object-Oriented Programming course materials  
 - Turn-based game design references  
-
----
-
-## 🎯 Objective
-Defeat the opponent by assembling a powerful army through smart merging, energy management, and strategic decision-making.
-
----
