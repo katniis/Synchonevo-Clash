@@ -172,7 +172,7 @@ cd Synchonevo-Clash
 bash
 javac -encoding UTF-8 src/cards/*.java src/boss/*.java src/units/*.java src/ui/*.java src/utils/*.java src/main/*.java
 ```
-# This compiles all .java files into .class files in the bin/ directory.
+***This compiles all .java files into .class files in the bin/ directory.***
 
 ### 3. Run the Game
 ```
@@ -180,13 +180,13 @@ bash
 java -Dfile.encoding=UTF-8 -cp src main.Main
 ```
 ### 4. Optional: Using run.bat (Windows Only)
-# Open the project folder.
-# Double-click run.bat or run it via the terminal:
+***Open the project folder.***
+***Double-click run.bat or run it via the terminal:***
 ```
 bash
 ./run.bat
 ```
-# The game will start, and you can follow on-screen prompts to play.
+***The game will start, and you can follow on-screen prompts to play.***
 
 ---
 
