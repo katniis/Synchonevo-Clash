@@ -187,7 +187,24 @@ java -Dfile.encoding=UTF-8 -cp src main.Main
 ---
 
 ## 📌 6. Sample Output
+```
+===========================================================================
+                           S Y N C H O N E V O   C L A S H
+===========================================================================
 
+                           [ 1 ]  Start New Game
+                           [ 2 ]  Continue
+                           [ 3 ]  How to Play
+                           [ 4 ]  Credits
+                           [ 5 ]  Exit
+
+===========================================================================
+                A turn-based merge & summon strategy auto-battler
+===========================================================================
+
+                    Enter your choice: _
+
+```
 ---
 
 ## 📌 7. Author and Acknowledgement
