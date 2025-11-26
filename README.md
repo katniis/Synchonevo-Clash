@@ -159,13 +159,35 @@ This enables flexible behaviors while keeping the code clean and unified.
 
 ---
 
-## 📌 5. How to Run the Program (Java)
+## 📌 How to Run the Program
 
-### ✔️ Step 1 — Open terminal in the project folder
+### 1. Clone the Repository
+```
+bash
+git clone https://github.com/katniis/Synchonevo-Clash.git
+cd Synchonevo-Clash
+```
+2. Compile the Java Files
+```
+bash
+javac -encoding UTF-8 src/cards/*.java src/boss/*.java src/units/*.java src/ui/*.java src/utils/*.java src/main/*.java
+```
+This compiles all .java files into .class files in the bin/ directory.
 
-### ✔️ Step 2 — Compile all Java files
+3. Run the Game
+```
+bash
+java -Dfile.encoding=UTF-8 -cp src main.Main
+```
+4. Optional: Using run.bat (Windows Only)
+Open the project folder.
 
-### ✔️ Step 3 — Run the game
+Double-click run.bat or run it via the terminal:
+```
+bash
+./run.bat
+```
+The game will start, and you can follow on-screen prompts to play.
 
 ---
 
