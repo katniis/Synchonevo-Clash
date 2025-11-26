@@ -21,6 +21,6 @@ public class ArcherUnit extends Unit {
     public String attack(Boss boss) {
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%s fires a piercing arrow at %s for %d damage.", displayName(), boss.getBossName(), dmg);
+        return String.format("%s fires a piercing arrow at %s for %d damage.", getName(), boss.getBossName(), dmg);
     }
 }

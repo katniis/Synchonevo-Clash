@@ -173,6 +173,9 @@ public class Game {
                 Utils.delay(800);
 
                 for (Unit u : unitsInOrder) {
+                    if(!boss.bossIsAlive()) break;
+                    if (u == null || !u.isAlive()) continue;
+
                     battleLog = u.attack(boss);
                     displayBattle(board);
                     Utils.delay(800);
@@ -181,11 +184,14 @@ public class Game {
             } else {
                 // Units attack first
                 for (Unit u : unitsInOrder) {
+                    if(!boss.bossIsAlive()) break;
+                    if (u == null || !u.isAlive()) continue;
                     battleLog = u.attack(boss);
                     displayBattle(board);
                     Utils.delay(800);
                 }
 
+                if(!boss.bossIsAlive()) break;
                 battleLog = bossAttackLog(board);
                 displayBattle(board);
                 Utils.delay(800);
@@ -237,7 +243,7 @@ public class Game {
                 if (!alive.isEmpty()) {
                     Unit target = alive.get(rng.nextInt(alive.size()));
                     target.takeDamage(dmg);
-                    log.append(target.displayName())
+                    log.append(target.getName())
                        .append(" for ").append(dmg)
                        .append(" damage. HP: [").append(target.getHp()).append("|").append(target.getMaxHp() + "]");
                 } else {
@@ -256,7 +262,7 @@ public class Game {
                     log.append(rowName(pattern)).append(": ");
                     for (Unit u : rowUnits) {
                         u.takeDamage(dmg);
-                        log.append(u.displayName()).append(" HP: ").append(u.getHp()).append("; ");
+                        log.append(u.getName()).append(" HP: ").append(u.getHp()).append("; ");
                     }
                 } else {
                     // Row empty, attack random alive unit
@@ -265,7 +271,7 @@ public class Game {
                     if (!aliveUnits.isEmpty()) {
                         Unit target = aliveUnits.get(rng.nextInt(aliveUnits.size()));
                         target.takeDamage(dmg);
-                        log.append(target.displayName())
+                        log.append(target.getName())
                            .append(" for ").append(dmg)
                            .append(" damage. HP: [").append(target.getHp()).append("|").append(target.getMaxHp() + "]");
                     } else {
