@@ -11,6 +11,7 @@
 
 <p align="center">
   <a href="#-objective">Objective</a> •
+  <a href="#oop">OOP Principle</a>a> •
   <a href="#-features">Features</a> •
   <a href="#-how-to-run">How to run</a> •
   <a href="#-gameplay-mechanics">Mechanics</a> •
@@ -104,6 +105,8 @@ General-purpose helper functions.
 - `Utils.java` – Random generators, formatting, and shared utility methods  
 
 ---
+
+## 🔰 OOP Principle
 
 ## 📌 5. How to Run the Program (Java)
 
