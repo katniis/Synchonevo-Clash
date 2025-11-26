@@ -105,8 +105,8 @@ General-purpose helper functions.
 - `Utils.java` – Random generators, formatting, and shared utility methods  
 
 ---
-
 ## 🔰 OOP Principle
+---
 
 ## 📌 5. How to Run the Program (Java)
 
