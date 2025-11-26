@@ -50,6 +50,7 @@ Systems like Display handling, Boss generation, Card creation, and utility funct
       ├── ☕ Diary.java
       └── ☕ FileHandler.java
 ```
+```
 SynchonevoClash/
 │
 ├── Boss/
@@ -79,7 +80,7 @@ SynchonevoClash/
 │
 └── Utils/
 └── Utils.java
-
+```
 
 ### 📌 Description of Key Folders
 
