@@ -21,6 +21,6 @@ public class MageUnit extends Unit {
         // flavor text
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%s casts a spell on %s for %d damage.", displayName(), boss.getBossName(), dmg);
+        return String.format("%s casts a spell on %s for %d damage.", getName(), boss.getBossName(), dmg);
     }
 }

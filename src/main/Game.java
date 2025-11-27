@@ -39,7 +39,7 @@ public class Game {
             Utils.delay(500);
             Utils.clearScreen();
             display.mainUI(shop, player, null, boss, stage);
-            System.out.println(" Choose: [1] Buy   [2] Roll   [3] Deploy   [4] Battle   [0] Exit");
+            System.out.println(" Choose: [1] Buy   [2] Roll   [3] Deploy   [4] Battle   [0] Exit | Back");
             int choice = Utils.promptInt(" " + player.getName() + ": ", 0, 4);
             
             try {
@@ -141,9 +141,13 @@ public class Game {
                         }
                     }
                 } else if (choice == 4) {
+                    if(!player.hasUnit()){
+                        System.out.println(" No Units Deployed");
+                        continue;
+                    }
                     if (boss == null || !boss.bossIsAlive()) spawnBoss();
                     startBattle();
-                } else {
+                } else if(choice == 0){
                     System.out.println(" Goodbye.");
                     break;
                 }
@@ -173,6 +177,9 @@ public class Game {
                 Utils.delay(800);
 
                 for (Unit u : unitsInOrder) {
+                    if(!boss.bossIsAlive()) break;
+                    if (u == null || !u.isAlive()) continue;
+
                     battleLog = u.attack(boss);
                     displayBattle(board);
                     Utils.delay(800);
@@ -181,11 +188,14 @@ public class Game {
             } else {
                 // Units attack first
                 for (Unit u : unitsInOrder) {
+                    if(!boss.bossIsAlive()) break;
+                    if (u == null || !u.isAlive()) continue;
                     battleLog = u.attack(boss);
                     displayBattle(board);
                     Utils.delay(800);
                 }
 
+                if(!boss.bossIsAlive()) break;
                 battleLog = bossAttackLog(board);
                 displayBattle(board);
                 Utils.delay(800);
@@ -196,6 +206,7 @@ public class Game {
         if (!boss.bossIsAlive()) {
             battleLog = "You defeated the boss!";
             displayBattle(board);
+            healAll(player);
             System.out.println();
             player.addGold(5 + (stage * 2));
             Utils.delay(1000);
@@ -206,6 +217,12 @@ public class Game {
             System.out.println("Game Over");
             gameover = true;
             Utils.delay(1000);
+        }
+    }
+
+    void healAll(Player player){
+        for(Unit u : player.getBoard()){
+            if(u != null) { u.healToFull(); }
         }
     }
 
@@ -230,7 +247,7 @@ public class Game {
                 if (!alive.isEmpty()) {
                     Unit target = alive.get(rng.nextInt(alive.size()));
                     target.takeDamage(dmg);
-                    log.append(target.displayName())
+                    log.append(target.getName())
                        .append(" for ").append(dmg)
                        .append(" damage. HP: [").append(target.getHp()).append("|").append(target.getMaxHp() + "]");
                 } else {
@@ -249,7 +266,7 @@ public class Game {
                     log.append(rowName(pattern)).append(": ");
                     for (Unit u : rowUnits) {
                         u.takeDamage(dmg);
-                        log.append(u.displayName()).append(" HP: ").append(u.getHp()).append("; ");
+                        log.append(u.getName()).append(" HP: ").append(u.getHp()).append("; ");
                     }
                 } else {
                     // Row empty, attack random alive unit
@@ -258,7 +275,7 @@ public class Game {
                     if (!aliveUnits.isEmpty()) {
                         Unit target = aliveUnits.get(rng.nextInt(aliveUnits.size()));
                         target.takeDamage(dmg);
-                        log.append(target.displayName())
+                        log.append(target.getName())
                            .append(" for ").append(dmg)
                            .append(" damage. HP: [").append(target.getHp()).append("|").append(target.getMaxHp() + "]");
                     } else {

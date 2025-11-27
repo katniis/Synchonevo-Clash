@@ -86,7 +86,7 @@ public abstract class Unit {
         if (!isAlive()) return name + " is dead and can't attack.";
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%star attacks %star for %d damage.", displayName(), boss.getBossName(), dmg);
+        return String.format("%star attacks %star for %d damage.", getName(), boss.getBossName(), dmg);
     }
 
     public String displayName() {

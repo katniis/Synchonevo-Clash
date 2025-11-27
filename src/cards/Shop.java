@@ -19,7 +19,7 @@ public class Shop {
         for (int i = 0; i < size; i++) {
             UnitType type = randomType();
             int star = chooseStar(stage);
-            int cost = 1 + (star - 1); // simple cost mapping
+            int cost = (int)Math.round(1 + ((star - 1) * 1.5)); // simple cost mapping
             String desc = "";
             slots.add(UnitFactory.createCard(type, star, cost, desc));
         }
@@ -30,7 +30,7 @@ public class Shop {
         for (int i = 0; i < size; i++) {
             UnitType type = randomType();
             int star = chooseStar(stage);
-            int cost = 1 + (star - 1); // simple cost mapping
+            int cost = (int)Math.round(1 + ((star - 1) * 1.5)); // simple cost mapping
             String desc = "";
             slots.add(UnitFactory.createCard(type, star, cost, desc));
         }

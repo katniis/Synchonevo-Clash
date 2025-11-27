@@ -26,7 +26,7 @@ public class Display {
         System.out.println("│" + center("Synchonevo Clash", width) + "│");
         System.out.println("├" + "─".repeat(width) + "┤");
 
-        // Boss
+        /*  Boss
         if (boss != null) {
             System.out.println(center(boss.getBossName(), width));
             System.out.println(center("HP: " + boss.getBossHp() + "/" + boss.getBossMaxHp(), width));
@@ -35,10 +35,10 @@ public class Display {
             System.out.println(center("[Boss]", width));
             System.out.println(center("", width));
         }
-
+        */
         System.out.println(" ".repeat(width));
 
-        // 3x3 Board Hardcoded
+        // 3x3 Board 
         System.out.println("\t[ " + name(p[0]) + " ]\t[ " + name(p[1]) + " ]\t[ " + name(p[2]) + " ]");
         System.out.println("\t[ " + name(p[3]) + " ]\t[ " + name(p[4]) + " ]\t[ " + name(p[5]) + " ]");
         System.out.println("\t[ " + name(p[6]) + " ]\t[ " + name(p[7]) + " ]\t[ " + name(p[8]) + " ]");
@@ -93,16 +93,15 @@ public class Display {
 
         // Board 3x3
         // 3x3 Board Hardcoded with HP under each unit
-        System.out.println("\t[ " + name(board[0]) + " ]\t[ " + name(board[1]) + " ]\t[ " + name(board[2]) + " ]");
+        System.out.println("\t" + cell(board[0]) + "\t" + cell(board[1]) + "\t" + cell(board[2]));
         System.out.println();
 
-        System.out.println("\t[ " + name(board[3]) + " ]\t[ " + name(board[4]) + " ]\t[ " + name(board[5]) + " ]");
+        System.out.println("\t" + cell(board[3]) + "\t" + cell(board[4]) + "\t" + cell(board[5]));
         System.out.println();
 
-        System.out.println("\t[ " + name(board[6]) + " ]\t[ " + name(board[7]) + " ]\t[ " + name(board[8]) + " ]");
+        System.out.println("\t" + cell(board[6]) + "\t" + cell(board[7]) + "\t" + cell(board[8]));
         System.out.println();
 
-        
         System.out.println("┌" + "─".repeat(width) + "┐");
         System.out.println(" Battle Log");
         System.out.println(" " + log);
@@ -110,4 +109,10 @@ public class Display {
 
         Utils.delay(1500);
     }
+
+    private String cell(Unit u) {
+    if (u == null) return "   ";               // empty → no brackets
+    return "[ " + name(u) + " ]";          // unit → keep bracket
+}
+
 }
