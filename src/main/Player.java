@@ -1,7 +1,9 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cards.Card;
 import cards.UnitFactory;
@@ -32,7 +34,7 @@ public class Player {
         if (bench.size() >= benchSize) return false;
         bench.add(card);
 
-        autoMergeBench();  // merge after adding
+        autoMerge();  // merge after adding
         return true;
     }
 
@@ -67,7 +69,7 @@ public class Player {
         board[pos] = summoned;
         bench.remove(benchIndex);
 
-        autoMergeBoard();  // merge after deployment
+        autoMerge();  // merge after deployment
         return true;
     }
 
@@ -147,10 +149,8 @@ public class Player {
             System.out.println("Error: Could not convert unit name to UnitType.");
             return false;
         }
-
         return true;
     }
-
 
     public boolean swapBenchToBench(int a, int b) {
         a--; b--;
@@ -167,97 +167,78 @@ public class Player {
         for (Unit u : board) if (u != null) count++;
         return count;
     }
+
     // Auto Merge Logic
-    private void autoMergeBench() {
-        boolean merged;
-        do {
-            merged = false;
-            outer: for (int i = 0; i < bench.size(); i++) {
-                Card c1 = bench.get(i);
-                int count = 1;
-                List<Integer> indices = new ArrayList<>();
-                indices.add(i);
-                // check for same name & star
-                for (int j = i + 1; j < bench.size(); j++) {
-                    Card c2 = bench.get(j);
-                    if (c1.getName().equals(c2.getName()) && c1.getStar() == c2.getStar()) {
-                        count++;
-                        indices.add(j);
-                        if (count == 3) break;
-                    }
-                }
-                if (count >= 3) {
-                    // remove 3 cards
-                    // remove from back to front to avoid index shift
-                    for (int k = indices.size() - 1; k >= 0; k--) {
-                        bench.remove((int)indices.get(k));
-                    }
-                    // add upgraded card
-                    Card upgraded = new Card(c1.getName(), c1.getCost(), "", c1.getType(), c1.getStar() + 1);
-                    bench.add(upgraded);
-                    merged = true;
-                    break outer; // restart scan
-                }
+private void autoMerge() {
+    boolean merged;
+    do {
+        merged = false;
+
+        Map<String, List<Integer>> locations = new HashMap<>();
+
+        // Board units
+        for (int i = 0; i < 9; i++) {
+            Unit u = board[i];
+            if (u != null) {
+                String key = u.getName() + "#" + u.getStar();
+                locations.computeIfAbsent(key, k -> new ArrayList<>()).add(i);
             }
-        } while (merged);
-    }
+        }
 
-    private void autoMergeBoard() {
-        boolean merged;
-        do {
-            merged = false;
-            // check each unit on board
-            outer: for (int i = 0; i < 9; i++) {
-                Unit u1 = board[i];
-                if (u1 == null) continue;
+        // Bench cards
+        for (int i = 0; i < bench.size(); i++) {
+            Card c = bench.get(i);
+            String key = c.getName() + "#" + c.getStar();
+            locations.computeIfAbsent(key, k -> new ArrayList<>()).add(9 + i);
+        }
 
-                int count = 1;
-                List<Integer> indices = new ArrayList<>();
-                indices.add(i);
+        // Scan for merges
+        for (Map.Entry<String, List<Integer>> entry : locations.entrySet()) {
+            List<Integer> idxs = entry.getValue();
+            if (idxs.size() >= 3) {
+                String[] parts = entry.getKey().split("#");
+                String name = parts[0];
+                int star = Integer.parseInt(parts[1]);
+                int newStar = star + 1;
 
-                // check other units
-                for (int j = i + 1; j < 9; j++) {
-                    Unit u2 = board[j];
-                    if (u2 != null && u1.getName().equals(u2.getName()) && u1.getStar() == u2.getStar()) {
-                        count++;
-                        indices.add(j);
-                        if (count == 3) break;
+                // Determine if merge has any board unit
+                int boardPos = -1;
+                int benchPos = -1;
+                int removedFromBench = 0;
+
+                for (int k = 0; k < 3; k++) {
+                    int idx = idxs.get(k);
+                    if (idx < 9) { // board
+                        if (boardPos == -1) boardPos = idx;
+                        board[idx] = null;
+                    } else { // bench
+                        if (benchPos == -1) benchPos = idx - 9;
+                        bench.remove(idx - 9 - removedFromBench);
+                        removedFromBench++;
                     }
                 }
 
-                // also check bench for same cards
-                for (int j = 0; j < bench.size(); j++) {
-                    Card c = bench.get(j);
-                    if (u1.getName().equals(c.getName()) && u1.getStar() == c.getStar()) {
-                        count++;
-                        indices.add(9 + j); // mark bench index offset
-                        if (count == 3) break;
-                    }
-                }
+                UnitType type = getUnitTypeByName(name);
+                if (type != null) {
+                    Unit upgraded = UnitFactory.createUnit(type, newStar);
 
-                if (count >= 3) {
-                    // remove units/cards involved
-                    int removed = 0;
-                    for (int idx : indices) {
-                        if (idx < 9) {
-                            board[idx] = null;
-                        } else {
-                            bench.remove(idx - 9 - removed);
-                            removed++;
-                        }
-                    }
-                    // summon upgraded unit at first board slot of merged units
-                    int boardPos = indices.get(0) < 9 ? indices.get(0) : findEmptyBoardSlot();
                     if (boardPos >= 0) {
-                        Unit upgraded = UnitFactory.createUnit(getUnitTypeByName(u1.getName()), u1.getStar() + 1);
-                        board[boardPos] = upgraded;
+                        board[boardPos] = upgraded; // board merge
+                    } else if (benchPos >= 0) {
+                        // all from bench → put upgraded in first bench slot of merged cards
+                        Card upgradedCard = UnitFactory.createCard(type, newStar, (int)((newStar - 1) * 1.5), "");
+                        bench.add(benchPos, upgradedCard);
                     }
-                    merged = true;
-                    break outer;
                 }
+
+                merged = true;
+                break;
             }
-        } while (merged);
-    }
+        }
+    } while (merged);
+}
+
+
 
     private int findEmptyBoardSlot() {
         for (int i = 0; i < 9; i++) if (board[i] == null) return i;
