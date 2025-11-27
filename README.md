@@ -1,6 +1,6 @@
 <!-- README.md for Synchonevo Clash -->
 <p align="center">
-  <img alt="logo" src="https://scontent.fmnl8-4.fna.fbcdn.net/v/t1.15752-9/588573797_1015015417479449_1294577793680810931_n.png?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFQjc1HQkkTDC7gPlJBGXCD-bW3fAVaFPT5tbd8BVoU9FOPRAivIUZ8kBqShGOlKcJtyxHE3r0CLXfyb7UTbW3Z&_nc_ohc=ZepHdTf98NAQ7kNvwFLAekF&_nc_oc=AdmFv10-n040Xit-uEuO-N7I_D4Gcp04VlJGUdbEROVElufuS813bTjipDZSt_HDQoqT_LNyBmoCQKr0D3fGTGWM&_nc_zt=23&_nc_ht=scontent.fmnl8-4.fna&oh=03_Q7cD3wGC52Nm_delvsoR4oGa5fa7CHcpaYZAp_MxAUjIO3bUqw&oe=694F0DE8" width="160" />
+  <img alt="logo" src="https://scontent.fmnl8-5.fna.fbcdn.net/v/t1.15752-9/588086944_1604359987195448_862868287568859527_n.png?stp=dst-png_s480x480&_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeFBbYX1ZpMRol48xzU5Nb2QT4MsweyH4WdPgyzB7IfhZ0ZYF9cJP2EpIHJR7KL038C5f6olTF7CrhbV5ZjKmBTE&_nc_ohc=cbiQdfu9mUMQ7kNvwFfLzAx&_nc_oc=AdkCxqDMAu9-15sKaS96Lu3czrh6sgOpHNkKSDCBjstJDb7lv2eterWYMPYvhHNcFgAUIgM731O2blt0OsU26qqO&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fmnl8-5.fna&oh=03_Q7cD3wG0EKMFJKGZ0R6qBz2p12l0pCT2AYnSauaEJk6ox6An_Q&oe=694F440D" width="160" />
 </p>
 
 <h1 align="center">⚔️ Synchonevo Clash — Merge Tactics</h1>
