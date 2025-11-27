@@ -1,6 +1,6 @@
 <!-- README.md for Synchonevo Clash -->
 <p align="center">
-  <img alt="logo" src="https://raw.githubusercontent.com/your-repo/synchonevo-clash/main/assets/logo.png" width="160" />
+  <img alt="logo" src="[https://raw.githubusercontent.com/your-repo/synchonevo-clash/main/assets/logo.png](https://scontent.fmnl8-4.fna.fbcdn.net/v/t1.15752-9/588573797_1015015417479449_1294577793680810931_n.png?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFQjc1HQkkTDC7gPlJBGXCD-bW3fAVaFPT5tbd8BVoU9FOPRAivIUZ8kBqShGOlKcJtyxHE3r0CLXfyb7UTbW3Z&_nc_ohc=ZepHdTf98NAQ7kNvwFLAekF&_nc_oc=AdmFv10-n040Xit-uEuO-N7I_D4Gcp04VlJGUdbEROVElufuS813bTjipDZSt_HDQoqT_LNyBmoCQKr0D3fGTGWM&_nc_zt=23&_nc_ht=scontent.fmnl8-4.fna&oh=03_Q7cD3wGC52Nm_delvsoR4oGa5fa7CHcpaYZAp_MxAUjIO3bUqw&oe=694F0DE8)" width="160" />
 </p>
 
 <h1 align="center">⚔️ Synchonevo Clash — Merge Tactics</h1>
