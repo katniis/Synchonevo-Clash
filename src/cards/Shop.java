@@ -1,6 +1,7 @@
 package cards;
 
 import java.util.*;
+import utils.*;
 import main.Player;
 public class Shop {
     private List<Card> slots = new ArrayList<>();
@@ -80,12 +81,25 @@ public class Shop {
 
     public void display(Player player) {
         System.out.println(" Shop | Gold: " + player.getGold());
+
         for (int i = 0; i < size; i++) {
             Card card = slots.get(i);
-            if ((i + 1) % 3 == 0){
+            String cardStr = card == null ? " " : card.toString();
+            // New line after every 2 cards
+            if ((i + 1) % 3 == 0) {
                 System.out.println();
             }
-            System.out.printf("\t[%d] %s\t", i + 1, card == null ? " " : card.toString());
+            // Center without outer brackets, preserve inner ones (like [1g])
+            cardStr = Utils.CenterCell(cardStr, true);
+            if (cardStr.startsWith("[") && cardStr.endsWith("]")) {
+                cardStr = cardStr.substring(1, cardStr.length() - 1);
+            }
+
+            // Print card with a tab
+            System.out.print("\t [" + (i + 1) + "] " + cardStr + "\t");
+
         }
     }
+
+
 }

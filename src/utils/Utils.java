@@ -70,6 +70,27 @@ public class Utils {
         }
     }
 
+    public static String CenterCell(String content, boolean isShop) {
+        int width = 24;
+        if (!isShop) width = 19;
+
+        if (content == null) content = "";
+
+        // Trim if too long
+        if (content.length() > width) {
+            content = content.substring(0, width);
+        }
+
+        int spaces = width - content.length();
+        int leftPad = spaces / 2;
+        int rightPad = spaces - leftPad;
+
+        String left = " ".repeat(leftPad);
+        String right = " ".repeat(rightPad);
+
+        return "[" + left + content + right + "]";
+    }
+
     // ANSI COLOR CODES
     public static final String RESET = "\u001B[0m";
 

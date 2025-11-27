@@ -14,12 +14,30 @@ public class Display {
 
     private Game game;
     private int width = 80;
-
+    public Display() {}
     public Display(Game g) { this.game = g; }
+
+    public void titleScreen(){
+        System.out.println("┌" + "─".repeat(width) + "┐");
+        System.out.println("│" + center("S Y N C H O N E V O   C L A S H", width) + "│");
+        System.out.println("├" + "─".repeat(width) + "┤");
+        System.out.println();
+
+        System.out.println(center("New Game", width));
+        System.out.println(center("Continue", width));
+        System.out.println(center("How to Play", width));
+        System.out.println(center("Credit", width));
+        System.out.println(center("Exit", width));
+        System.out.println();
+
+        System.out.println("┌" + "─".repeat(width) + "┐");
+        System.out.println(center("A turn-based merge & summon strategy auto-battler", width));
+        System.out.println("├" + "─".repeat(width) + "┤");
+    }
 
     public void mainUI(Shop shop, Player player, Unit unit, Boss boss, int stage) {
         Utils.clearScreen();
-
+        
         Unit[] p = player.getBoard(); // shorthand
 
         System.out.println("┌" + "─".repeat(width) + "┐");
@@ -39,9 +57,24 @@ public class Display {
         System.out.println(" ".repeat(width));
 
         // 3x3 Board 
-        System.out.println("\t[ " + name(p[0]) + " ]\t[ " + name(p[1]) + " ]\t[ " + name(p[2]) + " ]");
-        System.out.println("\t[ " + name(p[3]) + " ]\t[ " + name(p[4]) + " ]\t[ " + name(p[5]) + " ]");
-        System.out.println("\t[ " + name(p[6]) + " ]\t[ " + name(p[7]) + " ]\t[ " + name(p[8]) + " ]");
+        System.out.println(
+            "\t" + Utils.CenterCell(name(p[0]), false) + "\t"
+                + Utils.CenterCell(name(p[1]), false) + "\t"
+                + Utils.CenterCell(name(p[2]), false)
+        );
+
+        System.out.println(
+            "\t" + Utils.CenterCell(name(p[3]), false) + "\t"
+                + Utils.CenterCell(name(p[4]), false) + "\t"
+                + Utils.CenterCell(name(p[5]), false)
+        );
+
+        System.out.println(
+            "\t" + Utils.CenterCell(name(p[6]), false) + "\t"
+                + Utils.CenterCell(name(p[7]), false) + "\t"
+                + Utils.CenterCell(name(p[8]), false)
+        );
+
 
         
         System.out.println("\n┌" + "─".repeat(width) + "┐");
@@ -58,7 +91,7 @@ public class Display {
         return (u == null ? "               " : u.displayName());
     }
 
-    private String center(String text, int width) {
+    public String center(String text, int width) {
         int pad = (width - text.length()) / 2;
         return " ".repeat(pad) + text + " ".repeat(width - text.length() - pad);
     }
@@ -111,8 +144,9 @@ public class Display {
     }
 
     private String cell(Unit u) {
-    if (u == null) return "   ";               // empty → no brackets
-    return "[ " + name(u) + " ]";          // unit → keep bracket
-}
+        if (u == null) return "   ";               // empty → no brackets
+        return Utils.CenterCell(name(u), false);          // unit → keep bracket
+    }   
+
 
 }
