@@ -24,7 +24,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.gold = 1000;
+        this.gold = 3;
     }
 
     // ===================== Bench Handling =====================
