@@ -39,7 +39,7 @@ public class Game {
             Utils.delay(500);
             Utils.clearScreen();
             display.mainUI(shop, player, null, boss, stage);
-            System.out.println(" Choose: [1] Buy   [2] Roll   [3] Deploy   [4] Battle   [0] Exit | Back");
+            System.out.println(" Choose: [1] Buy   [2] Roll   [3] Action   [4] Battle   [0] Exit | Back");
             int choice = Utils.promptInt(" " + player.getName() + ": ", 0, 4);
             
             try {
@@ -77,7 +77,7 @@ public class Game {
                     }
 
                 } else if (choice == 3) {
-                    System.out.println(" [1] Deploy   [2] Move   [3] Swap");
+                    System.out.println(" [1] Deploy   [2] Sell   [3] Swap");
                     int t = Utils.promptInt(" Select action:", 1, 3);
 
                     if (t == 1) {
@@ -85,9 +85,17 @@ public class Game {
                         int p = Utils.promptInt(" Board position [1-9]:", 1, 9);
                         if (!player.deploy(b - 1, p)) System.out.println(" Deploy failed!");
                     } else if (t == 2) {
-                        int f = Utils.promptInt(" Move FROM [1-9]:", 1, 9);
-                        int to = Utils.promptInt(" Move TO [1-9]:", 1, 9);
-                        if (!player.move(f, to)) System.out.println(" Move failed!");
+                        System.out.println(" Sell Units: ");
+                        System.out.println(" 1. From BOARD");
+                        System.out.println(" 2. From BENCH");
+                        int a = Utils.promptInt(" Choose origin:", 1, 2);
+                        if(a == 1){
+                            int index = Utils.promptInt(" Select board slot [1-9]: ", 1, 9);
+                            if(!player.sellUnit(index)) System.out.println(" Sell Fail");
+                        }else if(a == 2){
+                            int index = Utils.promptInt(" Select bench slot [1-9]: ", 1, 9);
+                            if(!player.sellCard(index)) System.out.println(" Sell Fail");
+                        }
                     }else if (t == 3) {
                         System.out.println(" Swap Options: ");
                         System.out.println(" 1. From BOARD");

@@ -73,6 +73,33 @@ public class Player {
         return true;
     }
 
+    public boolean sellUnit(int index){
+        if(index < 0 || index >= board.length) return false;
+        if(board[index - 1] == null) return false;
+        int cost = (int)Math.round(1 + ((board[index - 1].getStar() - 1) * 1.5));
+        int refund = Math.round((float) cost / 2);
+        board[index - 1] = null;
+
+        addGold(refund);
+        return true;
+    }
+
+    public boolean sellCard(int indexInput){
+        int index = indexInput - 1; 
+        
+        if (index < 0 || index >= bench.size()) return false;
+
+        Card c = bench.get(index);
+        if (c == null) return false;
+
+        int refund = Math.round(c.getCost() / 2f);
+
+        bench.remove(index);     
+        addGold(refund);
+
+        return true;
+    }
+
     /** Move a unit from one board tile to another */
     public boolean move(int fromPos, int toPos) {
         fromPos -= 1;
@@ -169,74 +196,74 @@ public class Player {
     }
 
     // Auto Merge Logic
-private void autoMerge() {
-    boolean merged;
-    do {
-        merged = false;
+    private void autoMerge() {
+        boolean merged;
+        do {
+            merged = false;
 
-        Map<String, List<Integer>> locations = new HashMap<>();
+            Map<String, List<Integer>> locations = new HashMap<>();
 
-        // Board units
-        for (int i = 0; i < 9; i++) {
-            Unit u = board[i];
-            if (u != null) {
-                String key = u.getName() + "#" + u.getStar();
-                locations.computeIfAbsent(key, k -> new ArrayList<>()).add(i);
-            }
-        }
-
-        // Bench cards
-        for (int i = 0; i < bench.size(); i++) {
-            Card c = bench.get(i);
-            String key = c.getName() + "#" + c.getStar();
-            locations.computeIfAbsent(key, k -> new ArrayList<>()).add(9 + i);
-        }
-
-        // Scan for merges
-        for (Map.Entry<String, List<Integer>> entry : locations.entrySet()) {
-            List<Integer> idxs = entry.getValue();
-            if (idxs.size() >= 3) {
-                String[] parts = entry.getKey().split("#");
-                String name = parts[0];
-                int star = Integer.parseInt(parts[1]);
-                int newStar = star + 1;
-
-                // Determine if merge has any board unit
-                int boardPos = -1;
-                int benchPos = -1;
-                int removedFromBench = 0;
-
-                for (int k = 0; k < 3; k++) {
-                    int idx = idxs.get(k);
-                    if (idx < 9) { // board
-                        if (boardPos == -1) boardPos = idx;
-                        board[idx] = null;
-                    } else { // bench
-                        if (benchPos == -1) benchPos = idx - 9;
-                        bench.remove(idx - 9 - removedFromBench);
-                        removedFromBench++;
-                    }
+            // Board units
+            for (int i = 0; i < 9; i++) {
+                Unit u = board[i];
+                if (u != null) {
+                    String key = u.getName() + "#" + u.getStar();
+                    locations.computeIfAbsent(key, k -> new ArrayList<>()).add(i);
                 }
-
-                UnitType type = getUnitTypeByName(name);
-                if (type != null) {
-                    Unit upgraded = UnitFactory.createUnit(type, newStar);
-
-                    if (boardPos >= 0) {
-                        board[boardPos] = upgraded; // board merge
-                    } else if (benchPos >= 0) {
-                        // all from bench → put upgraded in first bench slot of merged cards
-                        Card upgradedCard = UnitFactory.createCard(type, newStar, (int)((newStar - 1) * 1.5), "");
-                        bench.add(benchPos, upgradedCard);
-                    }
-                }
-
-                merged = true;
-                break;
             }
-        }
-    } while (merged);
-}
+
+            // Bench cards
+            for (int i = 0; i < bench.size(); i++) {
+                Card c = bench.get(i);
+                String key = c.getName() + "#" + c.getStar();
+                locations.computeIfAbsent(key, k -> new ArrayList<>()).add(9 + i);
+            }
+
+            // Scan for merges
+            for (Map.Entry<String, List<Integer>> entry : locations.entrySet()) {
+                List<Integer> idxs = entry.getValue();
+                if (idxs.size() >= 3) {
+                    String[] parts = entry.getKey().split("#");
+                    String name = parts[0];
+                    int star = Integer.parseInt(parts[1]);
+                    int newStar = star + 1;
+
+                    // Determine if merge has any board unit
+                    int boardPos = -1;
+                    int benchPos = -1;
+                    int removedFromBench = 0;
+
+                    for (int k = 0; k < 3; k++) {
+                        int idx = idxs.get(k);
+                        if (idx < 9) { // board
+                            if (boardPos == -1) boardPos = idx;
+                            board[idx] = null;
+                        } else { // bench
+                            if (benchPos == -1) benchPos = idx - 9;
+                            bench.remove(idx - 9 - removedFromBench);
+                            removedFromBench++;
+                        }
+                    }
+
+                    UnitType type = getUnitTypeByName(name);
+                    if (type != null) {
+                        Unit upgraded = UnitFactory.createUnit(type, newStar);
+
+                        if (boardPos >= 0) {
+                            board[boardPos] = upgraded; // board merge
+                        } else if (benchPos >= 0) {
+                            // all from bench → put upgraded in first bench slot of merged cards
+                            Card upgradedCard = UnitFactory.createCard(type, newStar, (int)((newStar - 1) * 1.5), "");
+                            bench.add(benchPos, upgradedCard);
+                        }
+                    }
+
+                    merged = true;
+                    break;
+                }
+            }
+        } while (merged);
+    }
 
 
 
