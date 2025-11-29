@@ -91,6 +91,14 @@ public class Utils {
         return "[" + left + content + right + "]";
     }
 
+    public static void textTyper(String text, int delay){
+        for(char c : text.toCharArray()){
+            System.out.print(c);
+            Utils.delay(delay);
+        }
+        System.out.flush();
+        delay(50);
+    }
     // ANSI COLOR CODES
     public static final String RESET = "\u001B[0m";
 

@@ -33,8 +33,7 @@ public class Game {
     /** Main game loop */
     public void start() {
         Utils.clearScreen();
-        System.out.println("Welcome to Synchonevo Clash (CLI)");
-
+        Utils.textTyper("Welcome to Synchonevo Clash", 20);
         while (!gameover) {
             Utils.delay(500);
             Utils.clearScreen();
