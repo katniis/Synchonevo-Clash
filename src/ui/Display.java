@@ -81,9 +81,21 @@ public class Display {
         System.out.println("\n└" + "─".repeat(width) + "┘");
     }
 
-    public void showCredits(){
-        System.out.println(" I'd like to thank me, myself and also me.");
-    }
+    public static void showCredits() {
+    System.out.println("========================================");
+    System.out.println("              PROJECT CREDITS           ");
+    System.out.println("========================================");
+    System.out.println();
+
+    System.out.println(" Lead Programmer:        Justine Catapang");
+    System.out.println(" Game Mechanics:               Elijah Oreste");
+    System.out.println(" Tester / Bug Fixer:     Zaireh Macatangay");
+
+    System.out.println();
+    System.out.println("========================================");
+    System.out.println("  Thank you for playing SynchonevoClash!  ");
+    System.out.println("========================================");
+}
 
     public void mainUI(Shop shop, Player player, Unit unit, Boss boss, int stage) {
         Utils.clearScreen();
