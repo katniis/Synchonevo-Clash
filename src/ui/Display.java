@@ -23,8 +23,7 @@ public class Display {
         System.out.println("├" + "─".repeat(width) + "┤");
         System.out.println();
 
-        System.out.println(center("New Game", width));
-        System.out.println(center("Continue", width));
+        System.out.println(center("Start", width));
         System.out.println(center("How to Play", width));
         System.out.println(center("Credit", width));
         System.out.println(center("Exit", width));
@@ -33,6 +32,57 @@ public class Display {
         System.out.println("┌" + "─".repeat(width) + "┐");
         System.out.println(center("A turn-based merge & summon strategy auto-battler", width));
         System.out.println("├" + "─".repeat(width) + "┤");
+    }
+
+    public void showHowToPlay() {
+        Utils.clearScreen();
+        System.out.println("\n┌" + "─".repeat(width) + "┐");
+        System.out.println(center("HOW TO PLAY", width));
+        System.out.println("├" + "─".repeat(width) + "┤");
+
+
+        System.out.println("1. Recruiting Units");
+        System.out.println(" - Spend gold to purchase units from the shop.");
+        System.out.println(" - Units appear at random each round.");
+        System.out.println(" - You may place units on either the board (for battle) or the bench (storage).");
+        System.out.println();
+
+        System.out.println("2. Deploying Units");
+        System.out.println(" - Only units placed on the board will fight.");
+        System.out.println(" - You have limited board slots. Choose your strongest units.");
+        System.out.println(" - Move units between board and bench anytime before battle.");
+        System.out.println();
+
+        System.out.println("3. Auto-Merging Units");
+        System.out.println(" - Three identical units automatically merge into a stronger unit:");
+        System.out.println(" - Merges can occur from:");
+        System.out.println("     * Bench + Bench + Bench");
+        System.out.println("     * Board + Board + Board");
+        System.out.println("     * Board + Bench + Bench");
+        System.out.println(" - Upgraded units gain increased stats.");
+        System.out.println();
+
+        System.out.println("4. Selling Units");
+        System.out.println(" - You may sell a unit from your board or bench.");
+        System.out.println(" - Selling returns half of the unit's gold cost.");
+        System.out.println();
+
+        System.out.println("5. Starting a Battle");
+        System.out.println(" - Once ready, choose the option to begin the battle.");
+        System.out.println(" - Units fight automatically based on their stats.");
+        System.out.println(" - Bosses become stronger as the game progresses.");
+        System.out.println();
+
+        System.out.println("6. Winning and Losing");
+        System.out.println(" - Defeat the boss to win the round.");
+        System.out.println(" - If all your units die, you lose the round.");
+        System.out.println("\n\n" + center("[Enter to Return]", width));
+
+        System.out.println("\n└" + "─".repeat(width) + "┘");
+    }
+
+    public void showCredits(){
+        System.out.println(" I'd like to thank me, myself and also me.");
     }
 
     public void mainUI(Shop shop, Player player, Unit unit, Boss boss, int stage) {
@@ -147,6 +197,4 @@ public class Display {
         if (u == null) return "   ";               // empty → no brackets
         return Utils.CenterCell(name(u), false);          // unit → keep bracket
     }   
-
-
 }
