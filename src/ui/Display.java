@@ -194,7 +194,8 @@ public class Display {
     }
 
     private String cell(Unit u) {
-        if (u == null) return "   ";               // empty → no brackets
-        return Utils.CenterCell(name(u), false);          // unit → keep bracket
+        if (u == null) return "   ";             // empty → no brackets
+        if(!u.isAlive()) return Utils.color(Utils.CenterCell(name(u), false), Utils.RED);   // print red if the unit died
+        return Utils.color(Utils.CenterCell(name(u), false), Utils.GREEN);                  // green
     }   
 }

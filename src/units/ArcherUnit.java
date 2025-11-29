@@ -1,5 +1,6 @@
 package units;
 import boss.*;
+import utils.*;
 
 public class ArcherUnit extends Unit {
     private final int baseHp;
@@ -21,6 +22,7 @@ public class ArcherUnit extends Unit {
     public String attack(Boss boss) {
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%s fires a piercing arrow at %s for %d damage.", getName(), boss.getBossName(), dmg);
+        return String.format("%s fires a piercing arrow at %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED)
+    );
     }
 }

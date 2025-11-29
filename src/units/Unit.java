@@ -1,6 +1,8 @@
 package units;
 
 import java.util.Random;
+
+import utils.*;
 import boss.*;
 
 public abstract class Unit {
@@ -86,7 +88,7 @@ public abstract class Unit {
         if (!isAlive()) return name + " is dead and can't attack.";
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%star attacks %star for %d damage.", getName(), boss.getBossName(), dmg);
+        return String.format("%star attacks %star for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
     }
 
     public String displayName() {

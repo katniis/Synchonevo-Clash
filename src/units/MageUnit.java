@@ -1,5 +1,6 @@
 package units;
 import boss.*;
+import utils.*;
 public class MageUnit extends Unit {
     private final int baseHp;
     private final int baseAtk;
@@ -21,6 +22,6 @@ public class MageUnit extends Unit {
         // flavor text
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%s casts a spell on %s for %d damage.", getName(), boss.getBossName(), dmg);
+        return String.format("%s casts a spell on %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
     }
 }

@@ -257,7 +257,11 @@ public class Game {
                     target.takeDamage(dmg);
                     log.append(target.getName())
                        .append(" for ").append(dmg)
-                       .append(" damage. HP: [").append(target.getHp()).append("|").append(target.getMaxHp() + "]");
+                       .append(" damage. HP: ")
+                       .append(Utils.color("[", Utils.RED))
+                       .append(Utils.color(String.valueOf(target.getHp()), Utils.RED))
+                       .append(Utils.color("|", Utils.RED))
+                       .append(Utils.color(String.valueOf(target.getMaxHp()) + "]", Utils.RED));
                 } else {
                     log.append("No targets alive.");
                 }
@@ -285,7 +289,12 @@ public class Game {
                         target.takeDamage(dmg);
                         log.append(target.getName())
                            .append(" for ").append(dmg)
-                           .append(" damage. HP: [").append(target.getHp()).append("|").append(target.getMaxHp() + "]");
+                           .append(" damage. HP: ")
+                           .append(Utils.color("[", Utils.RED))
+                           .append(Utils.color(String.valueOf(target.getHp()), Utils.RED))
+                           .append(Utils.color("|", Utils.RED))
+                           .append(Utils.color(String.valueOf(target.getMaxHp()) + "]", Utils.RED));
+
                     } else {
                         log.append("No targets alive.");
                     }

@@ -1,5 +1,6 @@
 package units;
 import boss.*;
+import utils.*;
 
 public class TankUnit extends Unit {
     private final int baseHp;
@@ -21,6 +22,6 @@ public class TankUnit extends Unit {
     public String attack(Boss boss) {
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%s smashes %s for %d damage.", getName(), boss.getBossName(), dmg);
+        return String.format("%s smashes %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
     }
 }
