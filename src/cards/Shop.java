@@ -44,24 +44,52 @@ public class Shop {
 
     private int chooseStar(int stage) {
         double r = rand.nextDouble();
-        if (stage >= 15) {
-            if (r < 0.10) return 3;
-            if (r < 0.35) return 2;
+
+        if (stage >= 45) {
+            if (r < 0.15) return 5;
+            if (r < 0.45) return 4;
+            if (r < 0.65) return 3;
+            if (r < 0.90) return 2;
             return 1;
+
+        } else if (stage >= 40) {
+            if (r < 0.08) return 5;
+            if (r < 0.33) return 4;
+            if (r < 0.53) return 3;
+            if (r < 0.83) return 2;
+            return 1;
+
+        } else if (stage >= 35) {
+            if (r < 0.20) return 4;
+            if (r < 0.40) return 3;
+            if (r < 0.75) return 2;
+            return 1;
+
+        } else if (stage >= 25) {
+            if (r < 0.20) return 3;
+            if (r < 0.55) return 2;
+            return 1;
+
+        } else if (stage >= 15) {
+            if (r < 0.15) return 3;
+            if (r < 0.40) return 2;
+            return 1;
+
         } else if (stage >= 10) {
-            if (r < 0.05) return 3;
-            if (r < 0.25) return 2;
+            if (r < 0.08) return 3;
+            if (r < 0.28) return 2;
             return 1;
+
         } else if (stage >= 5) {
-            if (r < 0.03) return 3;
-            if (r < 0.17) return 2;
+            if (r < 0.20) return 2;
             return 1;
+
         } else {
-            if (r < 0.01) return 3;
-            if (r < 0.06) return 2;
+            if (r < 0.05) return 2;
             return 1;
         }
     }
+
 
     public List<Card> getSlots() { return slots; }
 
