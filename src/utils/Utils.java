@@ -30,12 +30,18 @@ public class Utils {
                 if (val < min || val > max) {
                     System.out.printf("Please enter a number between %d and %d.\n", min, max);
                     return -1;
-                } else return val;
+                } else  AudioPlayer.playSFX("click.wav"); return val;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Enter a number.");
             }
         }
     }
+    public static String promptString(String msg) {
+        System.out.print(msg);
+        AudioPlayer.playSFX("click.wav");
+        return scanner.nextLine();
+    }
+
 
     /** 
      * Pause execution for the given milliseconds.

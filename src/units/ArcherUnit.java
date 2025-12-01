@@ -22,7 +22,15 @@ public class ArcherUnit extends Unit {
     public String attack(Boss boss) {
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%s fires a piercing arrow at %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED)
-    );
+        switch(getName()){
+            case "Elf":
+                AudioPlayer.playSFX("elf_sfx.wav");
+                return String.format("%s fires an arrows %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+            case "Hunter":
+                AudioPlayer.playSFX("hunter_sfx.wav");
+                return String.format("%s fires a precise shot from his rifle %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+            default:
+                return super.attack(boss);
+        }  
     }
 }

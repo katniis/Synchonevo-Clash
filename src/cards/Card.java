@@ -2,9 +2,6 @@ package cards;
 
 import units.Unit;
 import utils.Utils;
-
-import javax.swing.text.Utilities;
-
 import cards.UnitFactory;
 
 public class Card {

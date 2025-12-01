@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import cards.Card;
 import cards.UnitFactory;
 import cards.UnitType;
@@ -26,7 +25,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.gold = 1000;
+        this.gold = 3;
     }
 
     // ===================== Bench Handling =====================
@@ -57,6 +56,7 @@ public class Player {
 
     /** Deploy from bench slot → board position (1–9) */
     public boolean deploy(int benchIndex, int pos) {
+        AudioPlayer.playSFX("deploy.wav");
         pos -= 1;
         if (benchIndex < 0 || benchIndex >= bench.size()) return false;
         if (pos < 0 || pos >= 9) return false;
@@ -74,6 +74,7 @@ public class Player {
     }
 
     public boolean sellUnit(int index){
+        AudioPlayer.playSFX("sell.wav");
         if(index < 0 || index >= board.length) return false;
         if(board[index - 1] == null) return false;
         int cost = (int)Math.round(1 + ((board[index - 1].getStar() - 1) * 1.5));
@@ -85,6 +86,7 @@ public class Player {
     }
 
     public boolean sellCard(int indexInput){
+        AudioPlayer.playSFX("sell.wav");
         int index = indexInput - 1; 
         
         if (index < 0 || index >= bench.size()) return false;
@@ -116,15 +118,17 @@ public class Player {
 
     /** Swaps */
     public boolean swapBoardToBoard(int a, int b) {
-    a--; b--;
-    if (a < 0 || a >= 9 || b < 0 || b >= 9) return false;
-    Unit tmp = board[a];
-    board[a] = board[b];
-    board[b] = tmp;
-    return true;
+        AudioPlayer.playSFX("swap.wav");
+        a--; b--;
+        if (a < 0 || a >= 9 || b < 0 || b >= 9) return false;
+        Unit tmp = board[a];
+        board[a] = board[b];
+        board[b] = tmp;
+        return true;
     }
 
     public boolean moveBoardToBench(int pos) {
+        AudioPlayer.playSFX("swap.wav");
         pos--;
         if (pos < 0 || pos >= 9) return false;
         Unit u = board[pos];
@@ -145,6 +149,7 @@ public class Player {
     }
 
     public boolean moveBenchToBoard(int bSlot, int boardPos) {
+        AudioPlayer.playSFX("swap.wav");
         bSlot--; 
         boardPos--;
 
@@ -180,6 +185,7 @@ public class Player {
     }
 
     public boolean swapBenchToBench(int a, int b) {
+        AudioPlayer.playSFX("swap.wav");
         a--; b--;
         if (a < 0 || a >= bench.size() || b < 0 || b >= bench.size()) return false;
 
@@ -259,16 +265,22 @@ public class Player {
                     }
 
                     merged = true;
+                    if(merged) {
+                        Utils.delay(200);
+                        AudioPlayer.playSFX("merge.wav");
+                    }
                     break;
                 }
             }
         } while (merged);
     }
 
+    /* 
     private int findEmptyBoardSlot() {
         for (int i = 0; i < 9; i++) if (board[i] == null) return i;
         return -1;
     }
+     */   
 
     private UnitType getUnitTypeByName(String name) {
     for (UnitType t : UnitType.values()) {

@@ -22,6 +22,18 @@ public class TankUnit extends Unit {
     public String attack(Boss boss) {
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%s smashes %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+        switch(getName()){
+            case "Heavy Swordman":
+                AudioPlayer.playSFX("heavyswordman_sfx.wav");
+                return String.format("%s crashes down with a heavy strike %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+            case "Elder Dwarf":
+                AudioPlayer.playSFX("elderdwarf_sfx.wav");
+                return String.format("%s smashes the enemy with his hammer %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+            case "Wyvern":
+                AudioPlayer.playSFX("wyvern_sfx.wav");
+                return String.format("%s breathes a scorching flame %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+            default:
+                return super.attack(boss);
+        }
     }
 }

@@ -7,7 +7,9 @@ public class Main {
         Scanner input = new Scanner(System.in);
         Display display = new Display();
         Utils.clearScreen();
-        Utils.textTyper(Utils.color("9 Elixer", Utils.PURPLE) + " Presents", 50);
+
+        display.launch();
+
         Utils.delay(500);
         while(true){
             Utils.clearScreen();

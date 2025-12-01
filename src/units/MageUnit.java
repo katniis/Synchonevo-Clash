@@ -22,6 +22,18 @@ public class MageUnit extends Unit {
         // flavor text
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%s casts a spell on %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+        switch(getName()){
+            case "Mage":
+                AudioPlayer.playSFX("mage_sfx.wav");
+                return String.format("%s casts a fiery bolt %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+            case "Warlock":
+                AudioPlayer.playSFX("warlock_sfx.wav");
+                return String.format("%s unleashes dark energy %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+            case "Wyrmlings":
+                AudioPlayer.playSFX("wyrmlings_sfx.wav");
+                return String.format("%s summons a swarm of magical dragons %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+            default:
+                return super.attack(boss);
+        }
     }
 }

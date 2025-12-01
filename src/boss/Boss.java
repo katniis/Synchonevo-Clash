@@ -35,7 +35,8 @@ public class Boss {
     }
 
     public int bossAttack() {
-        return bossAtk;  
+        double multiplier = 0.7 + Math.random() * 0.3;
+        return (int) (bossAtk * multiplier);  
     }
 
     @Override

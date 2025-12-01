@@ -35,55 +35,8 @@ public abstract class Unit {
     // Apply star scaling
     public void setStar(int star) {
         this.star = star;
-        double hpMultiplier = 1.0;
-        double atkMultiplier = 1.0;
-        
-        switch(star) {
-            case 1:
-                hpMultiplier = 1.0;
-                atkMultiplier = 1.0;
-                break;
-            case 2:
-                hpMultiplier = 0;
-                atkMultiplier = 0;
-                break;
-            case 3:
-                hpMultiplier = 0;
-                atkMultiplier = 0;
-                break;
-            case 4:
-                hpMultiplier = 0;
-                atkMultiplier = 0;
-                break;
-            case 5:
-                hpMultiplier = 0;
-                atkMultiplier = 0;
-                break;
-            case 6:
-                hpMultiplier = 0;
-                atkMultiplier = 0;
-                break;
-            case 7:
-                hpMultiplier = 0;
-                atkMultiplier = 0;
-                break;
-            case 8:
-                hpMultiplier = 0;
-                atkMultiplier = 0;
-                break;
-            case 9:
-                hpMultiplier = 0;
-                atkMultiplier = 0;
-                break;
-            case 10:
-                hpMultiplier = 0;
-                atkMultiplier = 0;
-                break;
-            default:
-                hpMultiplier = 1;
-                atkMultiplier = 1;
-                break;
-        }
+        double hpMultiplier = 1.0 + (star - 1) * 0.15;
+        double atkMultiplier = 1.0 + (star - 1) * 0.10;
         
         this.maxHp = (int)Math.round((double)baseHp() * hpMultiplier);
         this.hp = Math.min(this.hp, this.maxHp);

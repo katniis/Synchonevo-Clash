@@ -4,8 +4,8 @@ import cards.*;
 import ui.*;
 import units.*;
 import boss.*;
+import utils.AudioPlayer;
 import utils.Utils;
-
 import java.util.*;
 
 public class Game {
@@ -19,7 +19,6 @@ public class Game {
 
     public Game() {
         shop = new Shop(stage);
-        player = new Player("Player");
         display = new Display(this);
     }
 
@@ -33,7 +32,14 @@ public class Game {
     /** Main game loop */
     public void start() {
         Utils.clearScreen();
-        Utils.textTyper("Welcome to Synchonevo Clash", 20);
+        Utils.textTyper("Welcome to Synchonevo Clash\n", 20);
+        
+        String username = Utils.promptString("Enter your username: ");
+        player = new Player(username);
+        AudioPlayer.playSFX("click.wav");
+        
+        AudioPlayer.playBG("bgm.wav");
+
         while (!gameover) {
             Utils.delay(500);
             Utils.clearScreen();
@@ -61,6 +67,7 @@ public class Game {
                     card = shop.buy(slot, player.getGold()); // now allowed to roll
 
                     if (player.addToBench(card)) {
+                        AudioPlayer.playSFX("coin.wav");
                         player.spendGold(card.getCost());
                         System.out.println(" " + card.getName() + " added to bench!");
                     } else {
@@ -71,6 +78,7 @@ public class Game {
                     if (player.getGold() < cost) {
                         System.out.println(" Not enough gold to reroll.");
                     } else {
+                        AudioPlayer.playSFX("roll.wav");
                         player.spendGold(cost);
                         shop.roll(stage);
                     }
@@ -152,6 +160,7 @@ public class Game {
                         System.out.println(" No Units Deployed");
                         continue;
                     }
+                    Utils.delay(500);
                     if (boss == null || !boss.bossIsAlive()) spawnBoss();
                     startBattle();
                 } else if(choice == 0){
@@ -211,17 +220,20 @@ public class Game {
 
         // Battle outcome
         if (!boss.bossIsAlive()) {
+            AudioPlayer.playSFX("victory.wav");
             battleLog = "You defeated the boss!";
             displayBattle(board);
             healAll(player);
             System.out.println();
-            player.addGold(5 + (stage * 2));
+            player.addGold(3 + (stage * 2));
+            AudioPlayer.playBG("bgm.wav");
             Utils.delay(1000);
             stage++;
         } else {
             battleLog = "Your units have been defeated!";
             Utils.clearScreen();
-            System.out.println("Game Over");
+            AudioPlayer.playSFX("gameover.wav");
+            Utils.textTyper(Utils.color("Game Over", Utils.RED), 100);
             gameover = true;
             Utils.delay(1000);
         }
@@ -300,7 +312,7 @@ public class Game {
                 }
                 break;
         }
-
+        AudioPlayer.playSFX("bossatk.wav");
         return log.toString();
     }
 
