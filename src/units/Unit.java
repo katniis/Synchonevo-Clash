@@ -34,15 +34,57 @@ public abstract class Unit {
 
     // Apply star scaling
     public void setStar(int star) {
-        if (star < 1) star = 1;
-        if (star > 3) star = 3;
         this.star = star;
-        // scale stats per spec: 2★ => +30% HP, +20% ATK; 3★ => +60% HP, +40% ATK
         double hpMultiplier = 1.0;
         double atkMultiplier = 1.0;
-        if (star == 2) { hpMultiplier = 1.3; atkMultiplier = 1.2; }
-        if (star == 3) { hpMultiplier = 1.6; atkMultiplier = 1.4; }
-
+        
+        switch(star) {
+            case 1:
+                hpMultiplier = 1.0;
+                atkMultiplier = 1.0;
+                break;
+            case 2:
+                hpMultiplier = 0;
+                atkMultiplier = 0;
+                break;
+            case 3:
+                hpMultiplier = 0;
+                atkMultiplier = 0;
+                break;
+            case 4:
+                hpMultiplier = 0;
+                atkMultiplier = 0;
+                break;
+            case 5:
+                hpMultiplier = 0;
+                atkMultiplier = 0;
+                break;
+            case 6:
+                hpMultiplier = 0;
+                atkMultiplier = 0;
+                break;
+            case 7:
+                hpMultiplier = 0;
+                atkMultiplier = 0;
+                break;
+            case 8:
+                hpMultiplier = 0;
+                atkMultiplier = 0;
+                break;
+            case 9:
+                hpMultiplier = 0;
+                atkMultiplier = 0;
+                break;
+            case 10:
+                hpMultiplier = 0;
+                atkMultiplier = 0;
+                break;
+            default:
+                hpMultiplier = 1;
+                atkMultiplier = 1;
+                break;
+        }
+        
         this.maxHp = (int)Math.round((double)baseHp() * hpMultiplier);
         this.hp = Math.min(this.hp, this.maxHp);
         this.attack = (int)Math.round((double)baseAttack() * atkMultiplier);
@@ -88,7 +130,7 @@ public abstract class Unit {
         if (!isAlive()) return name + " is dead and can't attack.";
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
-        return String.format("%star attacks %star for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
+        return String.format("%s attacks %s for %s damage.", getName(), boss.getBossName(), Utils.color(String.valueOf(dmg), Utils.RED));
     }
 
     public String displayName() {
