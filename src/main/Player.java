@@ -224,7 +224,7 @@ public class Player {
                 List<Integer> idxs = entry.getValue();
                 if (idxs.size() >= 3) {
                     String[] parts = entry.getKey().split("#");
-                    String name = parts[0];
+                    String name = parts[0];                                     
                     int star = Integer.parseInt(parts[1]);
                     int newStar = star + 1;
 
@@ -265,19 +265,21 @@ public class Player {
         } while (merged);
     }
 
-
-
     private int findEmptyBoardSlot() {
         for (int i = 0; i < 9; i++) if (board[i] == null) return i;
         return -1;
     }
 
-    private cards.UnitType getUnitTypeByName(String name) {
-        for (cards.UnitType t : cards.UnitType.values()) {
-            if (name.equals(t.name()) || name.equalsIgnoreCase(t.name())) return t;
+    private UnitType getUnitTypeByName(String name) {
+    for (UnitType t : UnitType.values()) {
+        // Replace spaces with underscores and compare ignoring case
+        if (t.name().equalsIgnoreCase(name.replace(" ", "_"))) {
+            return t;
         }
-        return null;
     }
+    return null;
+}
+
 
     // Getters & Setters
     public String getName() { return name; }

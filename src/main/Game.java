@@ -1,9 +1,9 @@
 package main;
 
 import cards.*;
+import ui.*;
 import units.*;
 import boss.*;
-import ui.Display;
 import utils.Utils;
 
 import java.util.*;

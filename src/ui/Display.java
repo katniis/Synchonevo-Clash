@@ -81,7 +81,7 @@ public class Display {
         System.out.println("\n└" + "─".repeat(width) + "┘");
     }
 
-    public static void showCredits() {
+    public void showCredits() {
     System.out.println("========================================");
     System.out.println("              PROJECT CREDITS           ");
     System.out.println("========================================");
