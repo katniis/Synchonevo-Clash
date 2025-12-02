@@ -11,12 +11,12 @@
 
 <p align="center">
   <a href="#-objective">Objective</a> •
-  <a href="#oop">OOP Principle</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-how-to-run">How to run</a> •
-  <a href="#-gameplay-mechanics">Mechanics</a> •
-  <a href="#-dev-notes">Dev notes</a> •
-  <a href="#-roadmap">Roadmap</a>
+  <a href="#-highlights--features">Features</a> •
+  <a href="#-project-structure">Project Structure</a> •
+  <a href="#-oop-principles">OOP Principles</a> •
+  <a href="#-how-to-run-the-program">How to Run</a> •
+  <a href="#-sample-output">Sample Output</a> •
+  <a href="#-contributors">Contributors</a>
 </p>
 
 ---
