@@ -110,13 +110,21 @@ General-purpose helper functions.
 ## 🧩 OOP Principles  
 
 ## 💊 Encapsulation  
-Encapsulation is applied throughout the game by keeping sensitive data hidden inside classes and exposing them only through getters/setters.  
-For example:  
-- `Player` keeps **Bench**, and **Board** private.  
-- `Unit` keeps its **attack**, **defense**, **HP**, and **position** protected or private.  
-- `Boss` stores its stats internally and exposes controlled interactions such as `takeDamage()` and `bossIsAlive()`.
+Encapsulation is used across the codebase by keeping internal state private or protected and exposing only controlled access methods.
 
-By bundling data with the methods that operate on it, the system prevents accidental modification and maintains consistent game state.
+### `Unit.java`
+- Core stats (`hp`, `attack`, `star`, etc.) are **protected**, allowing subclass extension without exposing direct modification.
+- Access is controlled through getters (`getHp`, `getAttack`, `isAlive`) and safe setters like `setStar`.
+
+### `Boss.java`
+- Uses **private fields** with read-only getters.
+- Interaction happens only through methods like `bossTakeDamage()` and `bossIsAlive()`, preventing external mutation.
+
+### Player / Game / Shop
+- Game state (bench, board, shop inventory) is kept in **private collections**.
+- Operations (purchasing, merging, combat) happen through methods, ensuring consistent and safe state updates.
+
+Encapsulation keeps logic centralized and prevents invalid or uncontrolled data changes.
 
 ---
 
@@ -149,13 +157,22 @@ This promotes code reuse and allows new unit types to be added easily without mo
 ---
 
 ## 🎭 Polymorphism  
-Polymorphism is used extensively, especially during combat.
+Polymorphism allows different unit and boss types to be handled through shared base classes and factory patterns.
 
-### Examples:
-- `UnitFactory` and `BossFactory` return objects of different subclasses but with the same base type, allowing the program to treat all units and bosses uniformly.  
-- The battle sequence uses a list of `Unit` references while each actual unit acts according to its class-specific implementation.
+### UnitFactory
+- Returns objects as **`Unit`** while creating concrete subclasses (`WarriorUnit`, `MageUnit`, `ArcherUnit`, `TankUnit`).
+- Combat and game logic operate only on `Unit` references, enabling all unit types to be used interchangeably.
 
-This enables flexible behaviors while keeping the code clean and unified.
+### BossFactory
+- Produces different boss types but exposes them only through the **`Boss`** interface/API.
+- Game logic doesn’t need to know the specific boss class.
+
+### Abstract `Unit` Class
+- Defines abstract stat providers (`baseHp`, `baseAttack`) and default behavior (`computeDamage`, `attack`, `setStar`).
+- Subclasses override or extend behavior (custom effects, damage logic) while still fitting into the same battle flow.
+
+Polymorphism ensures different unit types behave uniquely while being treated uniformly in the game systems.
+
 
 ---
 
