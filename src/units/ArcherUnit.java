@@ -20,7 +20,7 @@ public class ArcherUnit extends Unit {
 
     @Override
     public String attack(Boss boss) {
-        int dmg = computeDamage();
+        int dmg = computeDamage() + (int)(getStar() * 1.2);
         boss.bossTakeDamage(dmg);
         switch(getName()){
             case "Elf":

@@ -20,7 +20,7 @@ public class WarriorUnit extends Unit {
 
     @Override
     public String attack(Boss boss) {
-        int dmg = computeDamage();
+        int dmg = computeDamage() + (getStar() * 2);
         boss.bossTakeDamage(dmg);
         switch(getName()){
             case "Dwarf":

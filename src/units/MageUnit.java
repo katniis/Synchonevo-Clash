@@ -1,9 +1,12 @@
 package units;
+import java.util.Random;
+
 import boss.*;
 import utils.*;
 public class MageUnit extends Unit {
     private final int baseHp;
     private final int baseAtk;
+    private Random rand = new Random();
 
     public MageUnit(String name, int hp, int atk, int speed, double critRate, double critDamage) {
         super(name, "MAGE", hp, atk, speed, critRate, critDamage);
@@ -19,7 +22,7 @@ public class MageUnit extends Unit {
 
     @Override
     public String attack(Boss boss) {
-        int dmg = computeDamage();
+        int dmg = rand.nextInt((int) 1.2 * (computeDamage() / 2), computeDamage());
         boss.bossTakeDamage(dmg);
         switch(getName()){
             case "Mage":
