@@ -106,7 +106,7 @@ General-purpose helper functions.
 
 ---
 
-## ₊˚ ┊ **🧩 OOP Principles**  
+## 🧩 OOP Principles  
 
 ## 💊 Encapsulation  
 Encapsulation is applied throughout the game by keeping sensitive data hidden inside classes and exposing them only through getters/setters.  
@@ -186,7 +186,7 @@ java -Dfile.encoding=UTF-8 -cp src main.Main
 
 ---
 
-## 📌 6. Sample Output
+## 📌 Sample Output
 ```
 ┌────────────────────────────────────────────────────────────────────────────────┐
 │                        S Y N C H O N E V O   C L A S H                         │
