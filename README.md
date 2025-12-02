@@ -164,8 +164,7 @@ Polymorphism allows different unit and boss types to be handled through shared b
 - Combat and game logic operate only on `Unit` references, enabling all unit types to be used interchangeably.
 
 ### BossFactory
-- Produces different boss types but exposes them only through the **`Boss`** interface/API.
-- Game logic doesn’t need to know the specific boss class.
+- Produces different boss types but exposes them only through the different stages.
 
 ### Abstract `Unit` Class
 - Defines abstract stat providers (`baseHp`, `baseAttack`) and default behavior (`computeDamage`, `attack`, `setStar`).
