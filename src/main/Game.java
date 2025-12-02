@@ -229,7 +229,7 @@ public class Game {
             battleLog = "Your units have been defeated!";
             Utils.clearScreen();
             AudioPlayer.playSFX("gameover.wav");
-            Utils.textTyper(Utils.color("Game Over", Utils.RED), 100);
+            Utils.textTyper(Utils.color("Game Over", Utils.RED), 500);
             gameover = true;
             Utils.delay(1000);
         }

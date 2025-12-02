@@ -208,7 +208,7 @@ java -Dfile.encoding=UTF-8 -cp src main.Main
 ## 👥 Contributors
 
 ### 👨‍💻 **Authors**
-- **Elijah Oreste** Game Mechanics
+- **Elijah Oreste** Game Designer
 - **Justine Catapang** Lead Developer  
 - **Zaireh Macatangay** Quality Assurance
 ---

@@ -139,9 +139,9 @@ public class Display {
     System.out.println("└" + "─".repeat(width) + "┘");
     System.out.println();
 
-    System.out.println(" \t\tLead Programmer:        Justine Catapang");
-    System.out.println(" \t\tGame Mechanics:         Elijah Oreste");
-    System.out.println(" \t\tTester / Bug Fixer:     Zaireh Macatangay");
+    System.out.println(" \t\tLead Developer:        Justine Catapang");
+    System.out.println(" \t\tGame Designer:         Elijah Oreste");
+    System.out.println(" \t\tQuality Assurance:     Zaireh Macatangay");
 
     System.out.println("\n\n" + center("[Enter to Return]", width));
 
