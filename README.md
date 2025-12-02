@@ -106,7 +106,7 @@ General-purpose helper functions.
 
 ---
 
-‧## ₊˚ ┊ **🧩 OOP Principles**  
+## ₊˚ ┊ **🧩 OOP Principles**  
 
 ## 💊 Encapsulation  
 Encapsulation is applied throughout the game by keeping sensitive data hidden inside classes and exposing them only through getters/setters.  
