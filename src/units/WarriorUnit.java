@@ -20,7 +20,6 @@ public class WarriorUnit extends Unit {
 
     @Override
     public String attack(Boss boss) {
-        // flavor text
         int dmg = computeDamage();
         boss.bossTakeDamage(dmg);
         switch(getName()){

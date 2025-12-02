@@ -43,7 +43,6 @@ public abstract class Unit {
         this.attack = (int)Math.round((double)baseAttack() * atkMultiplier);
     }
 
-    // base values should be provided by subclass if needed
     protected abstract int baseHp();
     protected abstract int baseAttack();
 
@@ -78,7 +77,6 @@ public abstract class Unit {
         return dmg;
     }
 
-    // Default attack: target the boss (single target model) - subclasses may override
     public String attack(Boss boss) {
         if (!isAlive()) return name + " is dead and can't attack.";
         int dmg = computeDamage();
