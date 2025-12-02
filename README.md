@@ -112,7 +112,7 @@ General-purpose helper functions.
 ## 💊 Encapsulation  
 Encapsulation is applied throughout the game by keeping sensitive data hidden inside classes and exposing them only through getters/setters.  
 For example:  
-- `Player` keeps **HP**, **gold**, **energy**, and **board** private.  
+- `Player` keeps **Bench**, and **Board** private.  
 - `Unit` keeps its **attack**, **defense**, **HP**, and **position** protected or private.  
 - `Boss` stores its stats internally and exposes controlled interactions such as `takeDamage()` and `bossIsAlive()`.
 
