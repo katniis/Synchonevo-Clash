@@ -53,39 +53,39 @@ public class Shop {
             return 1;
 
         } else if (stage >= 40) {
-            if (r < 0.08) return 5;
-            if (r < 0.33) return 4;
-            if (r < 0.53) return 3;
-            if (r < 0.83) return 2;
+            if (r < 0.10) return 5;
+            if (r < 0.30) return 4;
+            if (r < 0.40) return 3;
+            if (r < 0.80) return 2;
             return 1;
 
         } else if (stage >= 35) {
-            if (r < 0.20) return 4;
-            if (r < 0.40) return 3;
-            if (r < 0.75) return 2;
+            if (r < 0.10) return 4;
+            if (r < 0.30) return 3;
+            if (r < 0.50) return 2;
             return 1;
 
         } else if (stage >= 25) {
-            if (r < 0.20) return 3;
-            if (r < 0.55) return 2;
+            if (r < 0.15) return 3;
+            if (r < 0.30) return 2;
             return 1;
 
         } else if (stage >= 15) {
-            if (r < 0.15) return 3;
-            if (r < 0.40) return 2;
-            return 1;
-
-        } else if (stage >= 10) {
-            if (r < 0.08) return 3;
-            if (r < 0.28) return 2;
-            return 1;
-
-        } else if (stage >= 5) {
+            if (r < 0.10) return 3;
             if (r < 0.20) return 2;
             return 1;
 
-        } else {
+        } else if (stage >= 10) {
+            if (r < 0.05) return 3;
+            if (r < 0.10) return 2;
+            return 1;
+
+        } else if (stage >= 5) {
             if (r < 0.05) return 2;
+            return 1;
+
+        } else {
+            if (r < 0.01) return 2;
             return 1;
         }
     }
@@ -102,6 +102,7 @@ public class Shop {
         rollByDefault(stage);
         return card;
     }
+
     public Card peek(int slot) {
         if (slot < 1 || slot > slots.size()) return null;
         return slots.get(slot - 1);

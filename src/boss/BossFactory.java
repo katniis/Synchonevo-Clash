@@ -8,8 +8,8 @@ public class BossFactory {
 
     public static Boss getBossByStage(int stage) {
         int speed = rand.nextInt(4, 10);
-        int hp = 800 + (stage - 1) * 200; 
-        int atk = 50 + (stage - 1) * 5;    
+        int hp = 500 + (stage - 1) * 300; 
+        int atk = 50 + (stage - 1) * 7;    
 
         String name = switch(stage) {
             case 1 -> "Death King";

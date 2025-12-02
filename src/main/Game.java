@@ -110,9 +110,7 @@ public class Game {
                         int origin = Utils.promptInt(" Choose origin:", 1, 2);
 
                         if (origin == 1) {  
-                            // =============================
                             // FROM BOARD
-                            // =============================
                             int fromBoard = Utils.promptInt(" Select board slot [1-9]:", 1, 9);
 
                             System.out.println(" Move to:");
@@ -132,9 +130,7 @@ public class Game {
                             }
 
                         } else {
-                            // =============================
                             // FROM BENCH
-                            // =============================
                             int fromBench = Utils.promptInt(" Select bench slot:", 1, 9);
 
                             System.out.println(" Move to:");
@@ -289,7 +285,7 @@ public class Game {
                     log.append(rowName(pattern)).append(": ");
                     for (Unit u : rowUnits) {
                         u.takeDamage(dmg);
-                        log.append(u.getName()).append(" HP: ").append(u.getHp()).append("; ");
+                        log.append("\n\t").append(u.getName()).append(" HP: ").append(Utils.color(String.valueOf(u.getHp()), Utils.RED)).append(",");
                     }
                 } else {
                     // Row empty, attack random alive unit
