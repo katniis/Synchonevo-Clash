@@ -152,7 +152,6 @@ This promotes code reuse and allows new unit types to be added easily without mo
 Polymorphism is used extensively, especially during combat.
 
 ### Examples:
-- Each subclass of `Unit` overrides the `attack()` method with its own behavior, but the battle loop simply calls `u.attack(boss)` — allowing different attack styles to activate depending on the unit type.  
 - `UnitFactory` and `BossFactory` return objects of different subclasses but with the same base type, allowing the program to treat all units and bosses uniformly.  
 - The battle sequence uses a list of `Unit` references while each actual unit acts according to its class-specific implementation.
 
