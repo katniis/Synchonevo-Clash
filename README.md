@@ -121,14 +121,14 @@ By bundling data with the methods that operate on it, the system prevents accide
 ---
 
 ## 💡 Abstraction  
-Abstraction is used to hide complex logic behind simple, clean method calls.  
-Examples include:  
-- `Display` handles all drawing of the board, logs, and UI. The game never needs to know *how* it prints — it just calls `displayBoard()` or `displayBattle()`.  
-- `Utils` abstracts repeated logic like delays, random generation, and formatting.  
-- `UnitFactory` and `BossFactory` hide the complexity of creating units and bosses; the game simply calls `getUnit(type)` or `getBossByStage(stage)` without worrying about instantiation details.
+Abstraction is implemented in the game's `Units` package by defining a clear, generalized structure that all unit types follow. The core **abstract `Unit` class** contains shared fields, common behavior, and abstract methods that each subclass must fulfill.
+For example: 
+- `Unit` provides universal logic such as **HP handling**, **attack flow**, and **star scaling**.  
+- Abstract methods like `baseHp()` and `baseAttack()` are implemented differently by each specific unit.  
+- Concrete classes (`WarriorUnit`, `MageUnit`, `ArcherUnit`, `TankUnit`) only define their **unique stats** and any **specialized behavior** such as custom attack effects.
 
-This separation keeps the game flow readable and reduces clutter in the core logic.
-
+This separation allows the combat system and other game features to operate using the `Unit` type alone. The internal details of each subclass remain hidden, making the system cleaner, more flexible, and easy to expand with new units in the future.
+ 
 ---
 
 ## 🧬 Inheritance  
