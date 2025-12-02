@@ -188,51 +188,33 @@ java -Dfile.encoding=UTF-8 -cp src main.Main
 
 ## 📌 6. Sample Output
 ```
-===========================================================================
-                           S Y N C H O N E V O   C L A S H
-===========================================================================
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                        S Y N C H O N E V O   C L A S H                         │
+├────────────────────────────────────────────────────────────────────────────────┤
 
-                           [ 1 ]  Start New Game
-                           [ 2 ]  Continue
-                           [ 3 ]  How to Play
-                           [ 4 ]  Credits
-                           [ 5 ]  Exit
+                                   [1] Start
+                                [2] How to Play
+                                   [3] Credit
+                                    [4] Exit
 
-===========================================================================
-                A turn-based merge & summon strategy auto-battler
-===========================================================================
-
-                    Enter your choice: _
-
+┌────────────────────────────────────────────────────────────────────────────────┐
+               A turn-based merge & summon strategy auto-battler
+├────────────────────────────────────────────────────────────────────────────────┤
+  Enter:  
 ```
 ---
 
-## 📌 7. Author and Acknowledgement
+‧₊˚ ┊ Contributors
 
 ### 👨‍💻 **Authors**
-- **Elijah Oreste**  
-- **Justine Catapang**  
-- **Zaireh Macatangay**
+- **Elijah Oreste** Game Mechanics
+- **Justine Catapang** Lead Developer  
+- **Zaireh Macatangay** Quality Assurance
+---
 
 ### 🙏 **Acknowledgements**
 We acknowledge and give thanks to:  
-- Our **parents** for their support  
-- Our **professor** for guidance  
-- Our **peers** for feedback and assistance  
+We sincerely express our gratitude to our instructor for the guidance and support provided throughout the completion of this project. We also extend our appreciation to our classmates and peers for their cooperation and encouragement during the development process.
 - **God** for strength, wisdom, and inspiration throughout this project
 
 ---
-
-## 📌 8. Other Sections
-
-### 🔮 Future Enhancements
-- Add GUI using JavaFX or Swing  
-- Implement special unit abilities (AOE, buffs, shield, healing)  
-- Introduce PvP multiplayer mode  
-- Add rarity tiers for units  
-- Improve boss mechanics and add AI difficulty scaling  
-
-### 📚 References
-- Oracle Java Documentation  
-- Object-Oriented Programming course materials  
-- Turn-based game design references  
