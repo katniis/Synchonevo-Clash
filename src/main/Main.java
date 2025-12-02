@@ -26,7 +26,8 @@ public class Main {
                 String enter = input.nextLine();
                 if(enter.isEmpty()) continue;
             }else if(choice == 4){
-                System.out.println("DELETING OS");
+                Utils.clearScreen();
+                Utils.textTyper("Goodbye...", 100);
                 break;
             }
         }

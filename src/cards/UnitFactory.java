@@ -9,40 +9,40 @@ public class UnitFactory {
         switch (type) {
             // Warrior
             case DWARF:
-                u = new WarriorUnit("Dwarf", 240, 68, 6, 0.05, 1.5);
+                u = new WarriorUnit("Dwarf", 120, 34, 6, 0.05, 1.5);
                 break;
             case FIGHTER:
-                u = new WarriorUnit("Fighter", 260, 77, 7, 0.06, 1.5);
+                u = new WarriorUnit("Fighter", 130, 39, 7, 0.06, 1.5);
                 break;
 
             // Tank
             case HEAVY_SWORDMAN:
-                u = new TankUnit("Heavy Swordman", 340, 41, 5, 0.03, 1.3);
+                u = new TankUnit("Heavy Swordman", 170, 21, 5, 0.03, 1.3);
                 break;
             case ELDER_DWARF:
-                u = new TankUnit("Elder Dwarf", 320, 45, 6, 0.04, 1.4);
+                u = new TankUnit("Elder Dwarf", 160, 23, 6, 0.04, 1.4);
                 break;
             case WYVERN:
-                u = new TankUnit("Wyvern", 380, 54, 7, 0.05, 1.5);
+                u = new TankUnit("Wyvern", 190, 27, 7, 0.05, 1.5);
                 break;
 
             // Mage
             case MAGE:
-                u = new MageUnit("Mage", 160, 90, 7, 0.10, 1.7);
+                u = new MageUnit("Mage", 80, 45, 7, 0.10, 1.7);
                 break;
             case WARLOCK:
-                u = new MageUnit("Warlock", 170, 98, 6, 0.09, 1.6);
+                u = new MageUnit("Warlock", 85, 49, 6, 0.09, 1.6);
                 break;
             case WYRMLINGS:
-                u = new MageUnit("Wyrmlings", 180, 110, 8, 0.09, 1.6);
+                u = new MageUnit("Wyrmlings", 90, 55, 8, 0.09, 1.6);
                 break;
 
             // Archer
             case ELF:
-                u = new ArcherUnit("Elf", 200, 86, 9, 0.12, 1.6);
+                u = new ArcherUnit("Elf", 100, 43, 9, 0.12, 1.6);
                 break;
             case HUNTER:
-                u = new ArcherUnit("Hunter", 220, 99, 10, 0.13, 1.7);
+                u = new ArcherUnit("Hunter", 110, 50, 10, 0.13, 1.7);
                 break;
 
             default:

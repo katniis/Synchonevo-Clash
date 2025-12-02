@@ -227,8 +227,8 @@ public class Display {
         System.out.println("├" + "─".repeat(width) + "┤");
 
         // Boss
-        System.out.println(center(boss.getBossName(), width));
-        System.out.println(center("HP: " + boss.getBossHp() + "/" + boss.getBossMaxHp(), width));
+        System.out.println(Utils.color(center(boss.getBossName(), width), Utils.BRIGHT_PURPLE));
+        System.out.println(Utils.color(center("HP: " + boss.getBossHp() + "/" + boss.getBossMaxHp(), width),Utils.RED));
         System.out.println(" ".repeat(width));
 
         // Board 3x3
@@ -251,7 +251,7 @@ public class Display {
     }
 
     private String cell(Unit u) {
-        if (u == null) return "   ";             // empty → no brackets
+        if (u == null) return "                ";             // empty → no brackets
         if(!u.isAlive()) return Utils.color(Utils.CenterCell(name(u), false), Utils.RED);   // print red if the unit died
         return Utils.color(Utils.CenterCell(name(u), false), Utils.GREEN);                  // green
     }
