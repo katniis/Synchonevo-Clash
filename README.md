@@ -204,7 +204,7 @@ java -Dfile.encoding=UTF-8 -cp src main.Main
 ```
 ---
 
-‧₊˚ ┊ Contributors
+## 👥 Contributors
 
 ### 👨‍💻 **Authors**
 - **Elijah Oreste** Game Mechanics
